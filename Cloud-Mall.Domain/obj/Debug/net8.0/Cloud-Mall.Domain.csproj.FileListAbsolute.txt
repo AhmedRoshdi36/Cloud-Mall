@@ -1,0 +1,13 @@
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\bin\Debug\net8.0\Cloud-Mall.Domain.deps.json
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\bin\Debug\net8.0\Cloud-Mall.Domain.dll
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\bin\Debug\net8.0\Cloud-Mall.Domain.pdb
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.csproj.AssemblyReference.cache
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.AssemblyInfoInputs.cache
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.AssemblyInfo.cs
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.csproj.CoreCompileInputs.cache
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.sourcelink.json
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.dll
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\refint\Cloud-Mall.Domain.dll
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\Cloud-Mall.Domain.pdb
+E:\ITI\GRADUATION PROJECT\Cloud-Mall.Domain\obj\Debug\net8.0\ref\Cloud-Mall.Domain.dll

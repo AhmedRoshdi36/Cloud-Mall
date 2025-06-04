@@ -1,14 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\",
+  "WorkspaceRootPath": "E:\\ITI\\GRADUATION PROJECT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\backend\\cloud-mall.application\\cloud-mall.application.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\cloud-mall.application.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18E87BDE-FAEA-475E-BD0E-C607370AC021}|Cloud-Mall.API\\Cloud-Mall.API.csproj|e:\\iti\\graduation project\\backend\\cloud-mall.api\\cloud-mall.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{18E87BDE-FAEA-475E-BD0E-C607370AC021}|Cloud-Mall.API\\Cloud-Mall.API.csproj|solutionrelative:cloud-mall.api\\cloud-mall.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{132BA180-7B0B-40BE-B1B7-EE4FE37499D7}|Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj|e:\\iti\\graduation project\\cloud-mall.domain\\entities\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{132BA180-7B0B-40BE-B1B7-EE4FE37499D7}|Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj|solutionrelative:cloud-mall.domain\\entities\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,25 +35,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Cloud-Mall.Application",
-              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
-              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
-              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
-              "RelativeToolTip": "Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-01T13:28:16.064Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Cloud-Mall.API",
-              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\Cloud-Mall.API.csproj",
-              "RelativeDocumentMoniker": "Cloud-Mall.API\\Cloud-Mall.API.csproj",
-              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\Cloud-Mall.API.csproj",
-              "RelativeToolTip": "Cloud-Mall.API\\Cloud-Mall.API.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-01T13:27:14.012Z",
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Entities\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "Cloud-Mall.Domain\\Entities\\ApplicationUser.cs",
+              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Entities\\ApplicationUser.cs",
+              "RelativeToolTip": "Cloud-Mall.Domain\\Entities\\ApplicationUser.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T15:26:12.952Z",
               "EditorCaption": ""
             }
           ]

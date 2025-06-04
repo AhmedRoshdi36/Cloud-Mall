@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\Cloud-Mall.API.csproj": {}
+    "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Cloud-Mall.API.csproj": {}
   },
   "projects": {
-    "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\Cloud-Mall.API.csproj": {
+    "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Cloud-Mall.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\Cloud-Mall.API.csproj",
+        "projectUniqueName": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Cloud-Mall.API.csproj",
         "projectName": "Cloud-Mall.API",
-        "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\Cloud-Mall.API.csproj",
+        "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Cloud-Mall.API.csproj",
         "packagesPath": "C:\\Users\\mazen\\.nuget\\packages\\",
-        "outputPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.API\\obj\\",
+        "outputPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj": {
-                "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj"
+              "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj": {
+                "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj": {
+    "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
+        "projectUniqueName": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
         "projectName": "Cloud-Mall.Application",
-        "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
+        "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
         "packagesPath": "C:\\Users\\mazen\\.nuget\\packages\\",
-        "outputPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Application\\obj\\",
+        "outputPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -110,8 +110,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj": {
-                "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj"
+              "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj": {
+                "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj"
               }
             }
           }
@@ -151,14 +151,14 @@
         }
       }
     },
-    "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj": {
+    "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj",
+        "projectUniqueName": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj",
         "projectName": "Cloud-Mall.Domain",
-        "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj",
+        "projectPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\Cloud-Mall.Domain.csproj",
         "packagesPath": "C:\\Users\\mazen\\.nuget\\packages\\",
-        "outputPath": "E:\\ITI\\GRADUATION PROJECT\\Backend\\Cloud-Mall.Domain\\obj\\",
+        "outputPath": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -196,6 +196,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.16, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

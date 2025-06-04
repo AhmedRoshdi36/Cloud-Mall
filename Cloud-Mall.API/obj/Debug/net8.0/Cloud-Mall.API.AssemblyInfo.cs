@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cloud-Mall.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f712ee5619089539a331bd78b0b70ab429d1aba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b881449a08b65db23d9f52835305af609c7bf50c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cloud-Mall.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cloud-Mall.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
