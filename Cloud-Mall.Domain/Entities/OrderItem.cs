@@ -2,7 +2,7 @@
 {
     public class OrderItem
     {
-        public int OrderItemID { get; set; }
+        public int ID { get; set; }
         public int Quantity { get; set; }
         public decimal PriceAtTimeOfPurchase { get; set; }
 

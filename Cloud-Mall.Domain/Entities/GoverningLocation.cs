@@ -2,7 +2,7 @@
 {
     public class GoverningLocation
     {
-        public int LocationID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Region { get; set; }
         public virtual ICollection<StoreAddress> StoreAddresses { get; set; } = new List<StoreAddress>();

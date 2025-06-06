@@ -2,7 +2,7 @@
 {
     public class Review
     {
-        public int ReviewID { get; set; }
+        public int ID { get; set; }
         public int Rate { get; set; }
         public string Comment { get; set; }
         public DateTime CreatedAt { get; set; }
