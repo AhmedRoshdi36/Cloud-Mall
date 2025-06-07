@@ -9,7 +9,7 @@
         public int StoreID { get; set; }
         public virtual Store Store { get; set; }
 
-        public int LocationID { get; set; }
+        public int GoverningLocationID { get; set; }
         public virtual GoverningLocation GoverningLocation { get; set; }
     }
 }
