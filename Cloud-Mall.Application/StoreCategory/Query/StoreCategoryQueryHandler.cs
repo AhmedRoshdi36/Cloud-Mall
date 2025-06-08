@@ -15,14 +15,7 @@ namespace Cloud_Mall.Application.StoreCategory.Query
         public async Task<List<StoreCategoryDto>> Handle(StoreCategoryQuery request, CancellationToken cancellationToken)
         {
             var categories = await repository.GetAllAsync();
-            var categoryDtos = categories.Select(c => new StoreCategoryDto
-            {
-                Id = c.ID,
-                Name = c.Name,
-                Description = c.Description
-            }).ToList();
-
-            return categoryDtos;
+            return categories;
         }
     }
 }

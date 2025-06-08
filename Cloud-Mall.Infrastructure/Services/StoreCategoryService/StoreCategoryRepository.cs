@@ -23,9 +23,14 @@ namespace Cloud_Mall.Infrastructure.Services.StoreCategoryService
             return new StoreCategoryDto { Id = category.ID, Name = name, Description = description };
         }
 
-        public async Task<IEnumerable<StoreCategory>> GetAllAsync()
+        public async Task<List<StoreCategoryDto>> GetAllAsync()
         {
-            return await context.StoreCategories.ToListAsync();
+            return await context.StoreCategories.Select(c => new StoreCategoryDto()
+            {
+                Id = c.ID,
+                Name = c.Name,
+                Description = c.Description,
+            }).ToListAsync();
         }
     }
 }

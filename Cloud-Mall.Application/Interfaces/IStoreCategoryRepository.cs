@@ -4,7 +4,7 @@ namespace Cloud_Mall.Application.Interfaces
 {
     public interface IStoreCategoryRepository
     {
-        Task<IEnumerable<Domain.Entities.StoreCategory>> GetAllAsync();
+        Task<List<StoreCategoryDto>> GetAllAsync();
         Task<StoreCategoryDto> CreateAsync(string name, string description);
     }
 }
