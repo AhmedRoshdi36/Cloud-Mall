@@ -1,6 +1,7 @@
 ﻿using Cloud_Mall.Application.Interfaces;
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
+using Cloud_Mall.Infrastructure.Services.GoverningLocationService;
 using Cloud_Mall.Infrastructure.Services.IdentityService;
 using Cloud_Mall.Infrastructure.Services.StoreCategoryService;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +37,7 @@ namespace Cloud_Mall.Infrastructure
             // 3. Register your custom IIdentityService implementation
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IStoreCategoryRepository, StoreCategoryRepository>();
+            services.AddScoped<IGoverningLocationRepository, GoverningLocationRepository>();
 
             // Add other infrastructure services if any
 
