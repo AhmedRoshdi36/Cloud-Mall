@@ -1,10 +1,14 @@
-﻿using Cloud_Mall.Application.DTOs.Auth;
+﻿using Cloud_Mall.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Cloud_Mall.Application.Interfaces
 {
     public interface IIdentityService
     {
-        Task<AuthenticationResult> RegisterAsync(string name, string email, string password, string role);
-        Task<AuthenticationResult> LoginAsync(string email, string password);
+        Task<ApplicationUser?> FindByEmailAsync(string email);
+        Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password);
+        Task<IdentityResult> AddToRoleAsync(ApplicationUser user, string role);
+        Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
+        Task<IList<string>> GetRolesAsync(ApplicationUser user);
     }
 }

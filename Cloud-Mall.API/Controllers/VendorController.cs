@@ -7,10 +7,11 @@ namespace Cloud_Mall.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class VendorController : ControllerBase
     {
         private readonly IMediator mediator;
-        public AuthController(IMediator _mediator)
+
+        public VendorController(IMediator _mediator)
         {
             mediator = _mediator;
         }
@@ -18,10 +19,7 @@ namespace Cloud_Mall.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            Console.WriteLine(command.Name);
             var result = await mediator.Send(command);
             if (!result.Succeeded)
             {

@@ -1,8 +1,9 @@
 ﻿using Cloud_Mall.Application.Interfaces;
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
+using Cloud_Mall.Infrastructure.Services;
 using Cloud_Mall.Infrastructure.Services.GoverningLocationService;
-using Cloud_Mall.Infrastructure.Services.IdentityService;
+using Cloud_Mall.Infrastructure.Services.JwtTokenGenerator;
 using Cloud_Mall.Infrastructure.Services.StoreCategoryService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IStoreCategoryRepository, StoreCategoryRepository>();
             services.AddScoped<IGoverningLocationRepository, GoverningLocationRepository>();
+            services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
 
             // Add other infrastructure services if any
 
