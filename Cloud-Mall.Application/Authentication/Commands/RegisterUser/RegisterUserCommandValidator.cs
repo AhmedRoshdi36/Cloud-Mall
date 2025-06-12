@@ -6,11 +6,22 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
     {
         public RegisterUserCommandValidator()
         {
-            RuleFor(v => v.Name).NotEmpty().WithMessage("Name cannot be empty!")
-                .MaximumLength(100).WithMessage("Name cannot exceed 100 characters");
+            RuleFor(x => x.Name)
+            .NotEmpty().WithMessage("Name is required.");
 
-            RuleFor(v => v.Email).NotEmpty().WithMessage("Email cannot be empty")
-                .EmailAddress().WithMessage("Email is not a valid email address");
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage("Email is required.")
+                .EmailAddress().WithMessage("Invalid email format.");
+
+            RuleFor(x => x.Password)
+                .NotEmpty().WithMessage("Password is required.")
+                .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
+
+            RuleFor(x => x.ConfirmPassword)
+                .Equal(x => x.Password).WithMessage("Passwords do not match.");
+
+            RuleFor(x => x.Role)
+                .NotEmpty().WithMessage("Role is required.");
         }
     }
 }
