@@ -32,6 +32,8 @@ public class Program
         {
             options.SaveToken = true;
             options.RequireHttpsMetadata = false; // In development; set to true in production
+            var secret = builder.Configuration["JwtSettings:Secret"]
+    ?? throw new InvalidOperationException("JWT Secret is not configured.");
             options.TokenValidationParameters = new TokenValidationParameters()
             {
                 ValidateIssuer = true,
@@ -40,7 +42,7 @@ public class Program
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
                 ValidAudience = builder.Configuration["JwtSettings:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
             };
         });
         builder.Services.AddAuthorization();
