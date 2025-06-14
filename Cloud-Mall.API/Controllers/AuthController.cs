@@ -18,12 +18,8 @@ namespace Cloud_Mall.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var result = await mediator.Send(command);
-            if (!result.Succeeded)
+            if (!result.Success)
             {
                 return BadRequest(result);
             }
@@ -33,10 +29,6 @@ namespace Cloud_Mall.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var result = await mediator.Send(command);
 
             if (!result.Success)

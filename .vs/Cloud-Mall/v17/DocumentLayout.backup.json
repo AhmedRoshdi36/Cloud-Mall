@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "E:\\ITI\\GRADUATION PROJECT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{18E87BDE-FAEA-475E-BD0E-C607370AC021}|Cloud-Mall.API\\Cloud-Mall.API.csproj|e:\\iti\\graduation project\\cloud-mall.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18E87BDE-FAEA-475E-BD0E-C607370AC021}|Cloud-Mall.API\\Cloud-Mall.API.csproj|solutionrelative:cloud-mall.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\authentication\\commands\\registeruser\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\authentication\\commands\\registeruser\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\authentication\\commands\\loginuser\\loginusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\authentication\\commands\\loginuser\\loginusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\authentication\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\authentication\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,16 +27,8 @@
       "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\common\\validationbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\authentication\\commands\\loginuser\\loginusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\authentication\\commands\\loginuser\\loginusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\authentication\\commands\\loginuser\\loginusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\authentication\\commands\\loginuser\\loginusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|e:\\iti\\graduation project\\cloud-mall.application\\common\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B782FECC-825E-4FF3-B87D-E23AE0FF2806}|Cloud-Mall.Application\\Cloud-Mall.Application.csproj|solutionrelative:cloud-mall.application\\common\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{18E87BDE-FAEA-475E-BD0E-C607370AC021}|Cloud-Mall.API\\Cloud-Mall.API.csproj|e:\\iti\\graduation project\\cloud-mall.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,47 +46,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Cloud-Mall.API\\Controllers\\AuthController.cs",
-              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Cloud-Mall.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAYwBkAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T17:11:01.74Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginUserCommandHandler.cs",
-              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
-              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
-              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
-              "RelativeToolTip": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAswC4AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T16:17:10.087Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LoginUserCommand.cs",
-              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
-              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
-              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
-              "RelativeToolTip": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T16:17:06.134Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -101,33 +66,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Result.cs",
-              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Common\\Result.cs",
-              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Common\\Result.cs",
-              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Common\\Result.cs",
-              "RelativeToolTip": "Cloud-Mall.Application\\Common\\Result.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "RegisterUserCommandHandler.cs",
+              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "RelativeToolTip": "Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAACwAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T18:41:28.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegisterUserCommandValidator.cs",
+              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "RelativeToolTip": "Cloud-Mall.Application\\Authentication\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwB8AAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T18:28:03.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Common\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Common\\ApiResponse.cs",
+              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Common\\ApiResponse.cs",
+              "RelativeToolTip": "Cloud-Mall.Application\\Common\\ApiResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-14T16:05:16.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "LoginUserCommandHandler.cs",
+              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
+              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
+              "RelativeToolTip": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommandHandler.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAwC4AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T16:17:10.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Validationbehaviour.cs",
               "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Common\\Validationbehaviour.cs",
               "RelativeDocumentMoniker": "Cloud-Mall.Application\\Common\\Validationbehaviour.cs",
               "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Common\\Validationbehaviour.cs",
               "RelativeToolTip": "Cloud-Mall.Application\\Common\\Validationbehaviour.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwAMAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-14T15:55:58.181Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "Cloud-Mall.Application\\DependencyInjection.cs",
@@ -140,7 +144,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
+              "Title": "LoginUserCommand.cs",
+              "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
+              "RelativeDocumentMoniker": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
+              "ToolTip": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
+              "RelativeToolTip": "Cloud-Mall.Application\\Authentication\\Commands\\LoginUser\\LoginUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T16:17:06.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Cloud-Mall.Application.csproj",
               "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
               "RelativeDocumentMoniker": "Cloud-Mall.Application\\Cloud-Mall.Application.csproj",
@@ -152,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\ITI\\GRADUATION PROJECT\\Cloud-Mall.API\\Program.cs",
               "RelativeDocumentMoniker": "Cloud-Mall.API\\Program.cs",
