@@ -6,12 +6,12 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
 {
     public class RegisterUserCommand : IRequest<AuthenticationResult>
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }=null!;
+        public string Email { get; set; } = null!;
+        public string Password { get; set; } = null!;
 
         [Compare("Password", ErrorMessage = "Passwords do not match!")]
-        public string ConfirmPassword { get; set; }
-        public string Role { get; set; }
+        public string ConfirmPassword { get; set; }= null!;
+        public string Role { get; set; } = null!;
     }
 }

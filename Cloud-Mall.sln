@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud-Mall.API", "Cloud-Mall.API\Cloud-Mall.API.csproj", "{18E87BDE-FAEA-475E-BD0E-C607370AC021}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud-Mall.Domain", "Cloud-Mall.Domain\Cloud-Mall.Domain.csproj", "{132BA180-7B0B-40BE-B1B7-EE4FE37499D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud-Mall.Infrastructure", "Cloud-Mall.Infrastructure\Cloud-Mall.Infrastructure.csproj", "{E4E59554-B552-48E2-80B9-B945A16C9642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud-Mall.UnitTest", "Cloud-Mall.UnitTest\Cloud-Mall.UnitTest.csproj", "{6D8CB79C-54BD-492B-9B8B-CD1B8B0DE937}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{E4E59554-B552-48E2-80B9-B945A16C9642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4E59554-B552-48E2-80B9-B945A16C9642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4E59554-B552-48E2-80B9-B945A16C9642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8CB79C-54BD-492B-9B8B-CD1B8B0DE937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8CB79C-54BD-492B-9B8B-CD1B8B0DE937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8CB79C-54BD-492B-9B8B-CD1B8B0DE937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8CB79C-54BD-492B-9B8B-CD1B8B0DE937}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECAD2F41-A1DE-42B9-9A76-250EDD7565CC}
 	EndGlobalSection
 EndGlobal
