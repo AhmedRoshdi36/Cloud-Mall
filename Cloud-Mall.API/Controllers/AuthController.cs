@@ -39,7 +39,7 @@ namespace Cloud_Mall.API.Controllers
             }
             var result = await mediator.Send(command);
 
-            if (!result.Succeeded)
+            if (!result.Success)
             {
                 return Unauthorized(result);
             }
