@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, AuthenticationResult>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ApiResponse<AuthenticationResult>>
     {
         private readonly IIdentityService _identityService;
         private readonly ITokenGenerator _jwtTokenGenerator;
@@ -16,13 +16,13 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<AuthenticationResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<AuthenticationResult>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             // 1. Business Logic: Check if user already exists
             var existingUser = await _identityService.FindByEmailAsync(request.Email);
             if (existingUser != null)
             {
-                return new AuthenticationResult { Errors = new[] { "User with this email already exists." } };
+                return ApiResponse<AuthenticationResult>.Failure("User with this email already exists.");
             }
 
             // 2. Create the user entity
@@ -38,7 +38,7 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
             var createdUserResult = await _identityService.CreateUserAsync(newUser, request.Password);
             if (!createdUserResult.Succeeded)
             {
-                return new AuthenticationResult { Errors = createdUserResult.Errors.Select(e => e.Description) };
+                return ApiResponse<AuthenticationResult>.Failure(createdUserResult.Errors.Select(e => e.Description).ToList());
             }
 
             // 4. Assign the role
@@ -46,7 +46,7 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
             if (!roleResult.Succeeded)
             {
                 // In a real app, you might want to delete the user here (rollback)
-                return new AuthenticationResult { Errors = roleResult.Errors.Select(e => e.Description) };
+                return ApiResponse<AuthenticationResult>.Failure(createdUserResult.Errors.Select(e => e.Description).ToList());
             }
 
             // 5. Get roles for token generation
@@ -56,12 +56,12 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
             var token = _jwtTokenGenerator.GenerateToken(newUser, roles);
 
             // 7. Return the successful result DTO
-            return new AuthenticationResult
+            var auth = new AuthenticationResult
             {
-                Succeeded = true,
                 Token = token,
                 UserId = newUser.Id
             };
+            return ApiResponse<AuthenticationResult>.SuccessResult(auth);
         }
     }
 }

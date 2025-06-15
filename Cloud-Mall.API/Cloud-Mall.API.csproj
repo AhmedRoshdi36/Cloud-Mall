@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Cloud-Mall.Infrastructure\Cloud-Mall.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
