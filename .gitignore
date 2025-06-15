@@ -1,2 +1,87 @@
-**/bin
-**/obj
+## Ignore Visual Studio temporary files, build results, and user-specific files
+
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+artifacts/
+
+# Ignore user/session/cache files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Cache & metadata files
+*.dtbcache.v2
+*.futdcache.v2
+*.cache
+*.bak
+*.tmp
+*.json
+*.backup.json
+*.bin
+
+# Ignore all Visual Studio working folder contents
+.vs/
+.vs/**
+
+# Explicit subfolders inside .vs
+.vs/Cloud-Mall/
+.vs/Cloud-Mall/**/DesignTimeBuild/
+.vs/Cloud-Mall/**/v17/
+.vs/**/ProjectEvaluation/
+
+# ASP.NET specific
+project.lock.json
+project.fragment.lock.json
+project.assets.json
+
+# IIS Express
+*.iisexpress/
+
+# Web publish
+*.Publish.xml
+*.pubxml
+*.publishproj
+
+# Rider (JetBrains)
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+**/packages/*
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Test results
+TestResults/
+
+# EF Core/SQL/LocalDb
+*.dbmdl
+*.mdf
+*.ldf
+*.sqlite
+
+# Logs and backups
+*.log
+*.bak
+*.tmp
+
+# Windows image thumbs
+Thumbs.db
+ehthumbs.db
+
+# OS generated files
+.DS_Store
+Icon?
+desktop.ini
