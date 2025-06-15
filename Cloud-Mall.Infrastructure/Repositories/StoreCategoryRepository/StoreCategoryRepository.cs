@@ -4,7 +4,7 @@ using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cloud_Mall.Infrastructure.Services.StoreCategoryService
+namespace Cloud_Mall.Infrastructure.Repositories
 {
     internal class StoreCategoryRepository : IStoreCategoryRepository
     {
@@ -31,6 +31,11 @@ namespace Cloud_Mall.Infrastructure.Services.StoreCategoryService
                 Name = c.Name,
                 Description = c.Description,
             }).ToListAsync();
+        }
+
+        public async Task<StoreCategory?> GetById(int id)
+        {
+            return await context.StoreCategories.FindAsync(id);
         }
     }
 }

@@ -10,13 +10,13 @@ using Microsoft.AspNetCore.Identity;
 
 public class RegisterUserCommandHandlerTests
 {
-    private readonly Mock<IIdentityService> _mockIdentityService;
+    private readonly Mock<IIdentityRepository> _mockIdentityService;
     private readonly Mock<ITokenGenerator> _mockTokenGenerator;
     private readonly RegisterUserCommandHandler _handler;
 
     public RegisterUserCommandHandlerTests()
     {
-        _mockIdentityService = new Mock<IIdentityService>();
+        _mockIdentityService = new Mock<IIdentityRepository>();
         _mockTokenGenerator = new Mock<ITokenGenerator>();
 
         _mockTokenGenerator

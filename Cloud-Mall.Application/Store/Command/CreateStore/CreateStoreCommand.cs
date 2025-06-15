@@ -9,7 +9,6 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
         public string Description { get; set; }
         public int StoreCategoryID { get; set; }
         public IFormFile LogoFile { get; set; }
-        public string Addresses { get; set; }
     }
 
 }

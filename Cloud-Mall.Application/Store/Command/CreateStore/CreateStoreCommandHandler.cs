@@ -1,24 +1,23 @@
-﻿using System.Text.Json;
-using Cloud_Mall.Application.DTOs.Store;
-using Cloud_Mall.Application.Interfaces;
-using Cloud_Mall.Domain.Entities;
+﻿using Cloud_Mall.Application.Interfaces;
 using MediatR;
 
 namespace Cloud_Mall.Application.Store.Command.CreateStore
 {
     internal class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, ApiResponse<int>>
     {
-        private readonly IIdentityService identity;
+        private readonly IIdentityRepository identity;
         private readonly ICurrentUserService currentUser;
-        private readonly IStoreRepository repository;
+        private readonly IStoreRepository storeRepository;
         private readonly IFileService fileService;
+        private readonly IStoreCategoryRepository storeCategoryRepository;
 
-        public CreateStoreCommandHandler(ICurrentUserService currentUser, IStoreRepository repository, IIdentityService identity, IFileService fileService)
+        public CreateStoreCommandHandler(ICurrentUserService currentUser, IStoreRepository storeRepository, IIdentityRepository identity, IFileService fileService, IStoreCategoryRepository storeCategoryRepository)
         {
             this.currentUser = currentUser;
-            this.repository = repository;
+            this.storeRepository = storeRepository;
             this.identity = identity;
             this.fileService = fileService;
+            this.storeCategoryRepository = storeCategoryRepository;
         }
         public async Task<ApiResponse<int>> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
         {
@@ -27,8 +26,12 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
             {
                 return ApiResponse<int>.Failure("Vendor ID is not valid");
             }
-            var addressDTOs = JsonSerializer.Deserialize<List<StoreAddressDTO>>(request.Addresses,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var cat = await storeCategoryRepository.GetById(request.StoreCategoryID);
+            if (cat == null)
+            {
+                return ApiResponse<int>.Failure("There is no such category for this store");
+            }
 
             string logoUrl = null;
             if (request.LogoFile != null)
@@ -45,15 +48,9 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
                 StoreCategoryID = request.StoreCategoryID,
                 VendorID = currentUser.UserId,
                 CreatedAt = DateTime.UtcNow,
-                Addresses = addressDTOs.Select(a => new StoreAddress
-                {
-                    StreetAddress = a.StreetAddress,
-                    Notes = a.Notes,
-                    GoverningLocationID = a.GoverningLocationID
-                }).ToList()
             };
-            await repository.AddAsync(store);
-            await repository.SaveChangesAsync();
+            await storeRepository.AddAsync(store);
+            await storeRepository.SaveChangesAsync();
 
             return ApiResponse<int>.SuccessResult(store.ID);
         }

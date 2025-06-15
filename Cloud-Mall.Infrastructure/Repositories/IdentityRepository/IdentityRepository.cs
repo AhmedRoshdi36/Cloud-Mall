@@ -2,14 +2,14 @@
 using Cloud_Mall.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace Cloud_Mall.Infrastructure.Services
+namespace Cloud_Mall.Infrastructure.Repositories
 {
-    public class IdentityService : IIdentityService
+    public class IdentityRepository : IIdentityRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public IdentityService(
+        public IdentityRepository(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Cloud_Mall.Application.Interfaces
 {
-    public interface IIdentityService
+    public interface IIdentityRepository
     {
         Task<ApplicationUser?> FindByEmailAsync(string email);
         Task<ApplicationUser?> FindByIdAsync(string email);

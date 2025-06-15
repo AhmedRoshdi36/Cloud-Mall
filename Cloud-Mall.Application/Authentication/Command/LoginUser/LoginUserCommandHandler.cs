@@ -6,10 +6,10 @@ namespace Cloud_Mall.Application.Authentication.Commands.LoginUser
 {
     internal class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, ApiResponse<AuthenticationResult>>
     {
-        private readonly IIdentityService _identityService;
+        private readonly IIdentityRepository _identityService;
         private readonly ITokenGenerator _jwtTokenGenerator;
 
-        public LoginUserCommandHandler(IIdentityService identityService, ITokenGenerator jwtTokenGenerator)
+        public LoginUserCommandHandler(IIdentityRepository identityService, ITokenGenerator jwtTokenGenerator)
         {
             _identityService = identityService;
             _jwtTokenGenerator = jwtTokenGenerator;

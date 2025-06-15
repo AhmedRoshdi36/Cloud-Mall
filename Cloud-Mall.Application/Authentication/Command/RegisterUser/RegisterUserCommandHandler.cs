@@ -7,10 +7,10 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ApiResponse<AuthenticationResult>>
     {
-        private readonly IIdentityService _identityService;
+        private readonly IIdentityRepository _identityService;
         private readonly ITokenGenerator _jwtTokenGenerator;
 
-        public RegisterUserCommandHandler(IIdentityService identityService, ITokenGenerator jwtTokenGenerator)
+        public RegisterUserCommandHandler(IIdentityRepository identityService, ITokenGenerator jwtTokenGenerator)
         {
             _identityService = identityService;
             _jwtTokenGenerator = jwtTokenGenerator;

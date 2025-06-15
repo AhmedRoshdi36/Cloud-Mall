@@ -6,5 +6,6 @@ namespace Cloud_Mall.Application.Interfaces
     {
         Task<List<StoreCategoryDto>> GetAllAsync();
         Task<StoreCategoryDto> CreateAsync(string name, string description);
+        Task<Domain.Entities.StoreCategory?> GetById(int id);
     }
 }

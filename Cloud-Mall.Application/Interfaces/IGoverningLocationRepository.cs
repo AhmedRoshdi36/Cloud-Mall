@@ -6,5 +6,6 @@ namespace Cloud_Mall.Application.Interfaces
     {
         Task<GoverningLocationDTO> CreateAsync(string name, string region);
         Task<List<GoverningLocationDTO>> GetAllAsync();
+        Task<bool> AllExistAsync(IEnumerable<int> locationIds);
     }
 }
