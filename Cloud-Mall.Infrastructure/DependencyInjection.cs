@@ -2,9 +2,12 @@
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Cloud_Mall.Infrastructure.Services;
+using Cloud_Mall.Infrastructure.Services.CurrentUserService;
+using Cloud_Mall.Infrastructure.Services.FileService;
 using Cloud_Mall.Infrastructure.Services.GoverningLocationService;
 using Cloud_Mall.Infrastructure.Services.JwtTokenGenerator;
 using Cloud_Mall.Infrastructure.Services.StoreCategoryService;
+using Cloud_Mall.Infrastructure.Services.StoreService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -40,6 +43,9 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<IStoreCategoryRepository, StoreCategoryRepository>();
             services.AddScoped<IGoverningLocationRepository, GoverningLocationRepository>();
             services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<IFileService, FileService>();
 
             // Add other infrastructure services if any
 

@@ -58,7 +58,6 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
             // 7. Return the successful result DTO
             var auth = new AuthenticationResult
             {
-                Succeeded = true,
                 Token = token,
                 UserId = newUser.Id
             };

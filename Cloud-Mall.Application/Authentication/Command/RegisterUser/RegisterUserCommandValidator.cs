@@ -28,6 +28,7 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
                 .Equal(x => x.Password).WithMessage("Passwords do not match.");
 
             RuleFor(x => x.Role)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Role is required.")
                 .Must(x => roles.Contains(x)).WithMessage("A role must be Admin, Vendor, Client, Deliver");
         }

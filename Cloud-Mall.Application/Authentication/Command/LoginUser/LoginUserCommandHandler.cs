@@ -40,7 +40,6 @@ namespace Cloud_Mall.Application.Authentication.Commands.LoginUser
             // 5. Return the result
             var auth = new AuthenticationResult
             {
-                Succeeded = true,
                 Token = token,
                 UserId = user.Id
             };

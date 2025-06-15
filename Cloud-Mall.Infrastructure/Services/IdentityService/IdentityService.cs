@@ -42,5 +42,10 @@ namespace Cloud_Mall.Infrastructure.Services
         {
             return await _userManager.GetRolesAsync(user);
         }
+
+        public async Task<ApplicationUser?> FindByIdAsync(string Id)
+        {
+            return await _userManager.FindByIdAsync(Id);
+        }
     }
 }
