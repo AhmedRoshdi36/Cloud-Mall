@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cloud_Mall.Infrastructure.Persistence
 {
-    internal class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

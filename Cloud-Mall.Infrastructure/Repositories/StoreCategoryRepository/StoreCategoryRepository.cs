@@ -19,7 +19,6 @@ namespace Cloud_Mall.Infrastructure.Repositories
         {
             var category = new StoreCategory { Name = name, Description = description };
             await context.StoreCategories.AddAsync(category);
-            await context.SaveChangesAsync();
             return new StoreCategoryDto { Id = category.ID, Name = name, Description = description };
         }
 

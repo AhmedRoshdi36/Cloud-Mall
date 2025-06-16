@@ -5,19 +5,17 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
 {
     internal class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, ApiResponse<int>>
     {
+        private readonly IUnitOfWork unitOfWork;
         private readonly IIdentityRepository identity;
         private readonly ICurrentUserService currentUser;
-        private readonly IStoreRepository storeRepository;
         private readonly IFileService fileService;
-        private readonly IStoreCategoryRepository storeCategoryRepository;
 
-        public CreateStoreCommandHandler(ICurrentUserService currentUser, IStoreRepository storeRepository, IIdentityRepository identity, IFileService fileService, IStoreCategoryRepository storeCategoryRepository)
+        public CreateStoreCommandHandler(ICurrentUserService currentUser, IIdentityRepository identity, IFileService fileService, IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
             this.currentUser = currentUser;
-            this.storeRepository = storeRepository;
             this.identity = identity;
             this.fileService = fileService;
-            this.storeCategoryRepository = storeCategoryRepository;
         }
         public async Task<ApiResponse<int>> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
         {
@@ -27,7 +25,7 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
                 return ApiResponse<int>.Failure("Vendor ID is not valid");
             }
 
-            var cat = await storeCategoryRepository.GetById(request.StoreCategoryID);
+            var cat = await unitOfWork.StoreCategoriesRepository.GetById(request.StoreCategoryID);
             if (cat == null)
             {
                 return ApiResponse<int>.Failure("There is no such category for this store");
@@ -37,6 +35,10 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
             if (request.LogoFile != null)
             {
                 logoUrl = await fileService.SaveStoreLogoAsync(request.LogoFile, currentUser.UserId);
+            }
+            else
+            {
+                return ApiResponse<int>.Failure("You have to put a logo for your store");
             }
 
 
@@ -49,8 +51,8 @@ namespace Cloud_Mall.Application.Store.Command.CreateStore
                 VendorID = currentUser.UserId,
                 CreatedAt = DateTime.UtcNow,
             };
-            await storeRepository.AddAsync(store);
-            await storeRepository.SaveChangesAsync();
+            await unitOfWork.StoresRepository.AddAsync(store);
+            await unitOfWork.SaveChangesAsync();
 
             return ApiResponse<int>.SuccessResult(store.ID);
         }

@@ -35,10 +35,5 @@ namespace Cloud_Mall.Infrastructure.Repositories
                         .Include(s => s.Addresses)
                         .FirstOrDefaultAsync(s => s.ID == id && s.VendorID == vendorId);
         }
-
-        public async Task SaveChangesAsync()
-        {
-            await context.SaveChangesAsync();
-        }
     }
 }

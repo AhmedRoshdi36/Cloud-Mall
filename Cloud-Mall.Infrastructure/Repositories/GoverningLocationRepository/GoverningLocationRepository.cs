@@ -22,7 +22,6 @@ namespace Cloud_Mall.Infrastructure.Repositories
                 Region = region
             };
             await context.GoverningLocations.AddAsync(location);
-            await context.SaveChangesAsync();
             return new GoverningLocationDTO() { Id = location.ID, Name = name, Region = region };
         }
 

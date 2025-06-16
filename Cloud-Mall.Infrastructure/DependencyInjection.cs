@@ -36,12 +36,13 @@ namespace Cloud_Mall.Infrastructure
             .AddDefaultTokenProviders();
 
             // 3. Register your custom IIdentityService implementation
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IIdentityRepository, IdentityRepository>();
             services.AddScoped<IStoreCategoryRepository, StoreCategoryRepository>();
             services.AddScoped<IGoverningLocationRepository, GoverningLocationRepository>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IFileService, FileService>();
 
             // Add other infrastructure services if any
