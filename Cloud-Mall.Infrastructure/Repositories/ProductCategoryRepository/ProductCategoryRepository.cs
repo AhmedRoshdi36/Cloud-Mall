@@ -1,6 +1,7 @@
 ﻿using Cloud_Mall.Application.Interfaces.Repositories;
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cloud_Mall.Infrastructure.Repositories
 {
@@ -15,6 +16,12 @@ namespace Cloud_Mall.Infrastructure.Repositories
         {
             await context.ProductCategories.AddAsync(productCategory);
             return productCategory;
+        }
+        public async Task<List<ProductCategory>> GetAllStoreCategories(int storeId)
+        {
+            var categories = await context.ProductCategories.Where(pc =>
+            pc.StoreID == storeId).ToListAsync();
+            return categories;
         }
     }
 }

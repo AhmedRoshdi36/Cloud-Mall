@@ -1,6 +1,7 @@
 ﻿using Cloud_Mall.Application.DTOs.ProductCategory;
 using Cloud_Mall.Application.DTOs.Store;
 using Cloud_Mall.Application.ProductCategories.Command.CreateProductCategory;
+using Cloud_Mall.Application.ProductCategories.Query.GetAllProductCategories;
 using Cloud_Mall.Application.Stores.Command.AddStoreAddresses;
 using Cloud_Mall.Application.Stores.Command.CreateStore;
 using MediatR;
@@ -25,9 +26,7 @@ namespace Cloud_Mall.API.Controllers
         {
             var result = await mediator.Send(command);
             if (!result.Success)
-            {
                 return BadRequest(result);
-            }
             return Created("", result);
         }
 
@@ -44,9 +43,7 @@ namespace Cloud_Mall.API.Controllers
             var result = await mediator.Send(command);
 
             if (!result.Success)
-            {
                 return BadRequest(result);
-            }
 
             return Created("", result);
         }
@@ -63,10 +60,20 @@ namespace Cloud_Mall.API.Controllers
             };
             var result = await mediator.Send(command);
             if (!result.Success)
-            {
                 return BadRequest(result);
-            }
             return Created("", result);
         }
+
+        [HttpGet("productcategory/{storeId:int}")]
+        [Authorize(Roles = "Vendor")]
+        public async Task<IActionResult> GetAllStoreCategories([FromRoute] int storeId)
+        {
+            var query = new GetAllProductCategoriesQuery() { storeId = storeId };
+            var result = await mediator.Send(query);
+            if (!result.Success)
+                return BadRequest(result);
+            return Created("", result);
+        }
+
     }
 }
