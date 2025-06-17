@@ -1,5 +1,6 @@
 ﻿using Cloud_Mall.Application.Authentication.Commands.LoginUser;
 using Cloud_Mall.Application.Authentication.Commands.RegisterUser;
+using Cloud_Mall.Application.DTOs.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,17 +16,6 @@ namespace Cloud_Mall.API.Controllers
             mediator = _mediator;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
-        {
-            var result = await mediator.Send(command);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
-        }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
@@ -34,6 +24,82 @@ namespace Cloud_Mall.API.Controllers
             if (!result.Success)
             {
                 return Unauthorized(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("admin/register")]
+        public async Task<IActionResult> AdminRegister([FromBody] RegisterUserDTO request)
+        {
+            var command = new RegisterUserCommand()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password,
+                ConfirmPassword = request.ConfirmPassword,
+                Role = "Admin",
+            };
+            var result = await mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("vendor/register")]
+        public async Task<IActionResult> VendorRegister([FromBody] RegisterUserDTO request)
+        {
+            var command = new RegisterUserCommand()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password,
+                ConfirmPassword = request.ConfirmPassword,
+                Role = "Vendor",
+            };
+            var result = await mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("client/register")]
+        public async Task<IActionResult> ClientRegister([FromBody] RegisterUserDTO request)
+        {
+            var command = new RegisterUserCommand()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password,
+                ConfirmPassword = request.ConfirmPassword,
+                Role = "Client",
+            };
+            var result = await mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("delivery/register")]
+        public async Task<IActionResult> DeliveryRegister([FromBody] RegisterUserDTO request)
+        {
+            var command = new RegisterUserCommand()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password,
+                ConfirmPassword = request.ConfirmPassword,
+                Role = "Delivery",
+            };
+            var result = await mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
             }
             return Ok(result);
         }
