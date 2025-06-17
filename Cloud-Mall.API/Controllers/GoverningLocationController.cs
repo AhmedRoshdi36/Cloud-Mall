@@ -1,6 +1,6 @@
 ﻿using Cloud_Mall.Application.DTOs.GoverningLocation;
-using Cloud_Mall.Application.GoverningLocation.Command.CreateGoverningLocation;
-using Cloud_Mall.Application.GoverningLocation.Query.GetAllGoverningLocations;
+using Cloud_Mall.Application.GoverningLocations.Command.CreateGoverningLocation;
+using Cloud_Mall.Application.GoverningLocations.Query.GetAllGoverningLocations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

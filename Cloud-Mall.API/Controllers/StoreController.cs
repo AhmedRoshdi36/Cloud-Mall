@@ -1,6 +1,8 @@
-﻿using Cloud_Mall.Application.DTOs.Store;
-using Cloud_Mall.Application.Store.Command.AddStoreAddresses;
-using Cloud_Mall.Application.Store.Command.CreateStore;
+﻿using Cloud_Mall.Application.DTOs.ProductCategory;
+using Cloud_Mall.Application.DTOs.Store;
+using Cloud_Mall.Application.ProductCategories.Command.CreateProductCategory;
+using Cloud_Mall.Application.Stores.Command.AddStoreAddresses;
+using Cloud_Mall.Application.Stores.Command.CreateStore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +48,24 @@ namespace Cloud_Mall.API.Controllers
                 return BadRequest(result);
             }
 
+            return Created("", result);
+        }
+
+        [HttpPost("productcategory/{storeId:int}")]
+        [Authorize(Roles = "Vendor")]
+        public async Task<IActionResult> AddProductCategoryForStore([FromRoute] int storeId, [FromBody] CreateProductCategoryDTO request)
+        {
+            var command = new CreateProductCategoryCommand()
+            {
+                StoreID = storeId,
+                Name = request.Name,
+                Description = request.Description,
+            };
+            var result = await mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
             return Created("", result);
         }
     }

@@ -1,6 +1,6 @@
 ﻿using Cloud_Mall.Application.DTOs.StoreCategory;
-using Cloud_Mall.Application.StoreCategory.Command.CreateStoreCategory;
-using Cloud_Mall.Application.StoreCategory.Query;
+using Cloud_Mall.Application.StoreCategories.Command.CreateStoreCategory;
+using Cloud_Mall.Application.StoreCategories.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,5 @@
 ﻿using Cloud_Mall.Application.Interfaces;
-using Cloud_Mall.Infrastructure.Repositories;
+using Cloud_Mall.Application.Interfaces.Repositories;
 
 namespace Cloud_Mall.Infrastructure.Persistence
 {
@@ -8,27 +8,34 @@ namespace Cloud_Mall.Infrastructure.Persistence
         private readonly ApplicationDbContext context;
 
         public IStoreRepository StoresRepository { get; private set; }
-
         public IStoreCategoryRepository StoreCategoriesRepository { get; private set; }
-
         public IGoverningLocationRepository GoverningLocationsRepository { get; private set; }
-        public UnitOfWork(ApplicationDbContext context)
+        public IProductCategoryRepository ProductCategoryRepository { get; private set; }
+
+        public UnitOfWork(
+            ApplicationDbContext context,
+            IStoreRepository storesRepository,
+            IStoreCategoryRepository storeCategoriesRepository,
+            IGoverningLocationRepository governingLocationsRepository,
+            IProductCategoryRepository productCategoryRepository
+            )
         {
             this.context = context;
 
-            // Create instances of your concrete repositories, passing in the shared DbContext.
-            StoresRepository = new StoreRepository(context);
-            StoreCategoriesRepository = new StoreCategoryRepository(context);
-            GoverningLocationsRepository = new GoverningLocationRepository(context);
-        }
-        public void Dispose()
-        {
-            context.Dispose();
+            StoresRepository = storesRepository;
+            StoreCategoriesRepository = storeCategoriesRepository;
+            GoverningLocationsRepository = governingLocationsRepository;
+            ProductCategoryRepository = productCategoryRepository;
         }
 
         public Task<int> SaveChangesAsync()
         {
             return context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
         }
     }
 }
