@@ -6,5 +6,7 @@ namespace Cloud_Mall.Application.Interfaces
     {
         Task<string> SaveStoreLogoAsync(IFormFile file, string vendorId);
         Task<string> SaveProductImageAsync(IFormFile file, string storeId);
+        void DeleteProductImage(string imagePath);
+        void DeleteStoreLogo(string logoPath);
     }
 }

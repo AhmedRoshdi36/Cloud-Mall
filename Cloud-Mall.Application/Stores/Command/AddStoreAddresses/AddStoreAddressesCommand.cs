@@ -1,7 +1,7 @@
 ﻿using Cloud_Mall.Application.DTOs.Store;
 using MediatR;
 
-namespace Cloud_Mall.Application.Store.Command.AddStoreAddresses
+namespace Cloud_Mall.Application.Stores.Command.AddStoreAddresses
 {
     public class AddStoreAddressesCommand : IRequest<ApiResponse<bool>>
     {

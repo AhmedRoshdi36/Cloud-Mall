@@ -2,7 +2,7 @@
 using Cloud_Mall.Application.Interfaces;
 using MediatR;
 
-namespace Cloud_Mall.Application.StoreCategory.Query
+namespace Cloud_Mall.Application.StoreCategories.Query
 {
     internal class StoreCategoryQueryHandler : IRequestHandler<StoreCategoryQuery, List<StoreCategoryDto>>
     {

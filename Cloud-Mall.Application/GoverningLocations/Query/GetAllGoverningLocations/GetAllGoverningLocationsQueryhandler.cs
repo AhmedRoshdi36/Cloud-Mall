@@ -2,7 +2,7 @@
 using Cloud_Mall.Application.Interfaces;
 using MediatR;
 
-namespace Cloud_Mall.Application.GoverningLocation.Query.GetAllGoverningLocations
+namespace Cloud_Mall.Application.GoverningLocations.Query.GetAllGoverningLocations
 {
     public class GetAllGoverningLocationsQueryhandler : IRequestHandler<GetAllGoverningLocationsQuery, List<GoverningLocationDTO>>
     {

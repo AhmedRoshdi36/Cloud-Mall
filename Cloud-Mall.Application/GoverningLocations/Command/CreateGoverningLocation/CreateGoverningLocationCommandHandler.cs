@@ -2,7 +2,7 @@
 using Cloud_Mall.Application.Interfaces;
 using MediatR;
 
-namespace Cloud_Mall.Application.GoverningLocation.Command.CreateGoverningLocation
+namespace Cloud_Mall.Application.GoverningLocations.Command.CreateGoverningLocation
 {
     internal class CreateGoverningLocationCommandHandler : IRequestHandler<CreateGoverningLocationCommand, GoverningLocationDTO>
     {

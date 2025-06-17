@@ -1,7 +1,7 @@
 ﻿using Cloud_Mall.Application.Interfaces;
 using MediatR;
 
-namespace Cloud_Mall.Application.Store.Command.CreateStore
+namespace Cloud_Mall.Application.Stores.Command.CreateStore
 {
     internal class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, ApiResponse<int>>
     {

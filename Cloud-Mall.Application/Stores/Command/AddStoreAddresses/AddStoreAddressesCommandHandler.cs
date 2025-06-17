@@ -2,7 +2,7 @@
 using Cloud_Mall.Domain.Entities;
 using MediatR;
 
-namespace Cloud_Mall.Application.Store.Command.AddStoreAddresses
+namespace Cloud_Mall.Application.Stores.Command.AddStoreAddresses
 {
     public class AddStoreAddressesCommandHandler : IRequestHandler<AddStoreAddressesCommand, ApiResponse<bool>>
     {
