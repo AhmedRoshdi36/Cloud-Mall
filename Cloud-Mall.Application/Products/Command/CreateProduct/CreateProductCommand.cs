@@ -5,7 +5,7 @@ namespace Cloud_Mall.Application.Products.Command.CreateProduct
 {
     public class CreateProductCommand : IRequest<ApiResponse<int>>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string Description { get; set; }
         public string Brand { get; set; }
         public string SKU { get; set; }
