@@ -4,3 +4,5 @@ GET {{Cloud_Mall.API_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{Cloud_Mall.API_HostAddress}}/store/get-all-stores
+Accept: application/json

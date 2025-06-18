@@ -35,5 +35,10 @@ namespace Cloud_Mall.Infrastructure.Repositories
                         .Include(s => s.Addresses)
                         .FirstOrDefaultAsync(s => s.ID == id && s.VendorID == vendorId);
         }
+
+        public async Task<List<Store>> GetAllAsync()
+        {
+            return await context.Stores.Include(c=>c.StoreCategory).ToListAsync();
+        }
     }
 }

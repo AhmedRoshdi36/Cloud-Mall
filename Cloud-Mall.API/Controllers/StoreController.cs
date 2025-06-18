@@ -74,6 +74,14 @@ namespace Cloud_Mall.API.Controllers
                 return BadRequest(result);
             return Created("", result);
         }
+        [HttpGet("get-all-stores")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllStores()
+        {
+            var query = new Cloud_Mall.Application.Stores.Query.GetAllStoresQuery.GetAllStoresQuery();
+            var result = await mediator.Send(query);
+            return Ok(result);
 
+        }
     }
 }
