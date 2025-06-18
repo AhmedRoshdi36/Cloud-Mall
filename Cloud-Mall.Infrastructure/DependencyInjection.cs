@@ -3,6 +3,7 @@ using Cloud_Mall.Application.Interfaces.Repositories;
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Cloud_Mall.Infrastructure.Repositories;
+using Cloud_Mall.Infrastructure.Repositories.ProductRepository;
 using Cloud_Mall.Infrastructure.Services.CurrentUserService;
 using Cloud_Mall.Infrastructure.Services.FileService;
 using Cloud_Mall.Infrastructure.Services.JwtTokenGenerator;
@@ -43,6 +44,7 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<IGoverningLocationRepository, GoverningLocationRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IFileService, FileService>();

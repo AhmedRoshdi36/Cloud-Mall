@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Cloud-Mall.Domain\Cloud-Mall.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Products\Query\GetAllProducts\" />
+  </ItemGroup>
+
 </Project>

@@ -12,6 +12,8 @@ namespace Cloud_Mall.Infrastructure.Repositories
         {
             this.context = context;
         }
+
+        // Methods for vendor only
         public async Task<ProductCategory> AddAsync(ProductCategory productCategory)
         {
             await context.ProductCategories.AddAsync(productCategory);
@@ -22,6 +24,11 @@ namespace Cloud_Mall.Infrastructure.Repositories
             var categories = await context.ProductCategories.Where(pc =>
             pc.StoreID == storeId).ToListAsync();
             return categories;
+        }
+
+        public async Task<ProductCategory> GetById(int id, int storeId)
+        {
+            return await context.ProductCategories.FirstOrDefaultAsync(p => p.StoreID == storeId && p.ID == id);
         }
     }
 }

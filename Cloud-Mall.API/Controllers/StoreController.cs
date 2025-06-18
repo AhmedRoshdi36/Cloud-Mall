@@ -20,7 +20,7 @@ namespace Cloud_Mall.API.Controllers
             mediator = _mediator;
         }
 
-        [HttpPost]
+        [HttpPost("vendor")]
         [Authorize(Roles = "Vendor")]
         public async Task<IActionResult> CreateStore([FromForm] CreateStoreCommand command)
         {
@@ -30,7 +30,7 @@ namespace Cloud_Mall.API.Controllers
             return Created("", result);
         }
 
-        [HttpPost("addresses/{storeId}")]
+        [HttpPost("vendor/addresses/{storeId}")]
         [Authorize(Roles = "Vendor")]
         public async Task<IActionResult> AddAddresses(int storeId, [FromBody] List<StoreAddressDTO> addressDtos)
         {
@@ -48,7 +48,7 @@ namespace Cloud_Mall.API.Controllers
             return Created("", result);
         }
 
-        [HttpPost("productcategory/{storeId:int}")]
+        [HttpPost("vendor/productcategory/{storeId:int}")]
         [Authorize(Roles = "Vendor")]
         public async Task<IActionResult> AddProductCategoryForStore([FromRoute] int storeId, [FromBody] CreateProductCategoryDTO request)
         {
@@ -64,7 +64,7 @@ namespace Cloud_Mall.API.Controllers
             return Created("", result);
         }
 
-        [HttpGet("productcategory/{storeId:int}")]
+        [HttpGet("vendor/productcategory/{storeId:int}")]
         [Authorize(Roles = "Vendor")]
         public async Task<IActionResult> GetAllStoreCategories([FromRoute] int storeId)
         {
