@@ -4,6 +4,7 @@ using Cloud_Mall.Application.ProductCategories.Command.CreateProductCategory;
 using Cloud_Mall.Application.ProductCategories.Query.GetAllProductCategories;
 using Cloud_Mall.Application.Stores.Command.AddStoreAddresses;
 using Cloud_Mall.Application.Stores.Command.CreateStore;
+using Cloud_Mall.Application.Stores.Query.GetStoreByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -76,12 +77,23 @@ namespace Cloud_Mall.API.Controllers
         }
         [HttpGet("get-all-stores")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllStores()
+        public async Task<IActionResult> GetAllStores(string? categoryName = null, int pageNumber = 1, int pageSize = 10)
         {
-            var query = new Cloud_Mall.Application.Stores.Query.GetAllStoresQuery.GetAllStoresQuery();
+            var query = new Cloud_Mall.Application.Stores.Query.GetAllStoresQuery.GetAllStoresQuery(categoryName,pageNumber,pageSize);
             var result = await mediator.Send(query);
+            if(result == null)
+                return NotFound("No stores found");
             return Ok(result);
 
+        }
+        [HttpGet("get-store/{storeId:int}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetStoreById([FromRoute] int storeId)
+        {
+            var result = await mediator.Send(new GetStoreByIdQuery(storeId));
+            if (result == null)
+                return NotFound("Store not found");
+            return Ok(result);
         }
     }
 }

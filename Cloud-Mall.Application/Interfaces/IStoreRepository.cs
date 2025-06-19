@@ -9,5 +9,7 @@ namespace Cloud_Mall.Application.Interfaces
         Task<Store?> GetByIdAsync(int id, string vendorId);
         Task DeleteAsync(Store store);
         Task<List<Store>> GetAllAsync();
+        Task<Store?> GetStoreByIdAsync(int id);
+        Task<List<Store>> GetStoresByCategoryNameAsync(string categoryName);
     }
 }

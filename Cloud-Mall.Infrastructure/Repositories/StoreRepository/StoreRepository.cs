@@ -38,7 +38,22 @@ namespace Cloud_Mall.Infrastructure.Repositories
 
         public async Task<List<Store>> GetAllAsync()
         {
-            return await context.Stores.Include(c=>c.StoreCategory).ToListAsync();
+            return await context.Stores.Include(c => c.StoreCategory).ToListAsync();
+        }
+
+        public async Task<Store?> GetStoreByIdAsync(int id)
+        {
+            return await context.Stores
+                .Include(s => s.StoreCategory)
+                .FirstOrDefaultAsync(s => s.ID == id);
+        }
+
+        public async Task<List<Store>> GetStoresByCategoryNameAsync(string categoryName)
+        {
+            return await context.Stores
+                .Include(s => s.StoreCategory)
+                .Where(s => s.StoreCategory.Name == categoryName)
+                .ToListAsync();
         }
     }
 }

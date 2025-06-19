@@ -6,5 +6,8 @@ public class Profiler : Profile
     {
         CreateMap<Domain.Entities.Store, DTOs.Store.GetAllStoresDTO>()
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.StoreCategory.Name));
+        CreateMap<Domain.Entities.Store, DTOs.Store.GetOneStoreDTO>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.StoreCategory.Name));
+            //.ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.Addresses));
     }
 }

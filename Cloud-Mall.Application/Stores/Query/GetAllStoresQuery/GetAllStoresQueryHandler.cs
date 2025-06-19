@@ -9,7 +9,16 @@ public class GetAllStoresQueryHandler(IStoreRepository storeRepository, IMapper 
 {
     public async Task<List<GetAllStoresDTO>> Handle(GetAllStoresQuery request, CancellationToken cancellationToken)
     {
-        var stores = await storeRepository.GetAllAsync();
+        List<Domain.Entities.Store> stores;
+        if (!string.IsNullOrEmpty(request.CategoryName))
+        {
+            stores = await storeRepository.GetStoresByCategoryNameAsync(request.CategoryName);
+        }
+        else
+        {
+            stores = await storeRepository.GetAllAsync();
+        }
+        stores = stores.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
         return mapper.Map<List<GetAllStoresDTO>>(stores);
     }
 }
