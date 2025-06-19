@@ -51,5 +51,13 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
                 .Take(pageSize)
                 .ToListAsync();
         }
+
+        public async Task<Product?> GetProductByIdAsync(int id)
+        {
+            return await context.Products
+                .Include(p => p.ProductCategory)
+                .Include(p => p.Reviews)
+                .FirstOrDefaultAsync(p => p.ID == id);
+        }
     }
 }

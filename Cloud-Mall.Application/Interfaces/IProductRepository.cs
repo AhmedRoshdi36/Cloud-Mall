@@ -7,5 +7,6 @@ namespace Cloud_Mall.Application.Interfaces
         Task AddProduct(Product product);
         Task<List<Product>> GetAllByStore(int storeId);
         Task<List<Product>> GetAllProductsAsync(string? name, string? brand, decimal? minPrice, decimal? maxPrice, double? minRate, double? maxRate, string? category, int pageNumber, int pageSize);
+        Task<Product?> GetProductByIdAsync(int id);
     }
 }

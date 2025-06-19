@@ -35,5 +35,16 @@ namespace Cloud_Mall.API.Controllers
             var result = await mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var query = new Cloud_Mall.Application.Products.Query.GetProductByIdQuery.GetProductByIdQuery(id);
+            var result = await mediator.Send(query);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
     }
 }
