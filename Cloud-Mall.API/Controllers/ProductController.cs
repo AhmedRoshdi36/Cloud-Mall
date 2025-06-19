@@ -56,5 +56,41 @@ namespace Cloud_Mall.API.Controllers
                 return BadRequest("Could not add product to cart.");
             return Ok();
         }
+
+        [HttpGet("cart")]
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> ShowAllCartProducts()
+        {
+            var result = await mediator.Send(new Cloud_Mall.Application.Cart.Query.ShowAllCartProductsQuery());
+            return Ok(result);
+        }
+
+        [HttpPut("cart/quantity")]
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> UpdateCartItemQuantity([FromBody] Cloud_Mall.Application.DTOs.Cart.UpdateCartItemQuantityCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (!result)
+                return BadRequest("Could not update quantity.");
+            return Ok();
+        }
+
+        [HttpDelete("cart/product")]
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> RemoveProductFromCart([FromBody] Cloud_Mall.Application.DTOs.Cart.RemoveProductFromCartCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (!result)
+                return BadRequest("Could not remove product from cart.");
+            return Ok();
+        }
+
+        [HttpGet("cart/total")]
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> CalculateCartTotal()
+        {
+            var result = await mediator.Send(new Cloud_Mall.Application.Cart.Query.CalculateCartTotalQuery());
+            return Ok(result);
+        }
     }
 }

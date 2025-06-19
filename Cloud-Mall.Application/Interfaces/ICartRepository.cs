@@ -7,5 +7,6 @@ namespace Cloud_Mall.Application.Interfaces
     {
         Task<Cloud_Mall.Domain.Entities.Cart> GetOrCreateCartForClientAsync(string clientId);
         Task AddProductToCartAsync(string clientId, int productId, int quantity);
+        void RemoveCartItem(Cloud_Mall.Domain.Entities.CartItem cartItem);
     }
 } 

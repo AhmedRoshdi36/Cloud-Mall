@@ -44,5 +44,10 @@ namespace Cloud_Mall.Infrastructure.Repositories
             cart.UpdatedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();
         }
+
+        public void RemoveCartItem(CartItem cartItem)
+        {
+            _context.CartItems.Remove(cartItem);
+        }
     }
 } 
