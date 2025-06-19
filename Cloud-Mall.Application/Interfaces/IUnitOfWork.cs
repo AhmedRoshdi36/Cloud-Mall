@@ -9,6 +9,7 @@ namespace Cloud_Mall.Application.Interfaces
         IGoverningLocationRepository GoverningLocationsRepository { get; }
         IProductCategoryRepository ProductCategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        ICartRepository CartRepository { get; }
         //Add more when needed...
         Task<int> SaveChangesAsync();
     }

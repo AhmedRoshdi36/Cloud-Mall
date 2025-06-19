@@ -46,5 +46,15 @@ namespace Cloud_Mall.API.Controllers
                 return NotFound();
             return Ok(result);
         }
+
+        [HttpPost("cart")]
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> AddToCart([FromBody] Cloud_Mall.Application.DTOs.Cart.AddProductToCartCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (!result)
+                return BadRequest("Could not add product to cart.");
+            return Ok();
+        }
     }
 }

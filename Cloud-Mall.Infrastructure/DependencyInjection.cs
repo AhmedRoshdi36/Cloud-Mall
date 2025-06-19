@@ -48,6 +48,7 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
             // Add other infrastructure services if any
 
