@@ -20,6 +20,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
         public async Task<List<Product>> GetAllByStore(int storeId)
         {
             return await context.Products
+                .Include(p => p.ProductCategory)
                 .Where(p => p.StoreID == storeId)
                 .ToListAsync();
         }
