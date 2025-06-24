@@ -25,6 +25,7 @@ namespace Cloud_Mall.Infrastructure.Repositories
         public async Task<List<Store>> GetAllByVendorAsync(string vendorId)
         {
             return await context.Stores.Where(s => s.VendorID == vendorId)
+                .Include(s => s.StoreCategory)
                 .Include(s => s.Addresses)
                 .ToListAsync();
         }

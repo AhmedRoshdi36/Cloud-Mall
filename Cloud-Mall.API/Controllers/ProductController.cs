@@ -93,6 +93,7 @@ namespace Cloud_Mall.API.Controllers
         {
             var result = await mediator.Send(new Cloud_Mall.Application.Cart.Query.CalculateCartTotalQuery());
             return Ok(result);
+        }
 
         [HttpGet("vendor/{storeId:int}")]
         [Authorize(Roles = "Vendor")]
