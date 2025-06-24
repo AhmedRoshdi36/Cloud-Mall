@@ -21,6 +21,8 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
         {
             return await context.Products
                 .Include(p => p.ProductCategory)
+                .Include(p => p.Store)
+                .Include(p => p.Reviews)
                 .Where(p => p.StoreID == storeId)
                 .ToListAsync();
         }
@@ -58,6 +60,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
             return await context.Products
                 .Include(p => p.ProductCategory)
                 .Include(p => p.Reviews)
+                .Include(p => p.Store)
                 .FirstOrDefaultAsync(p => p.ID == id);
         }
     }
