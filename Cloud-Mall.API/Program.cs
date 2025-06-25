@@ -47,6 +47,17 @@ public class Program
         });
         builder.Services.AddAuthorization();
 
+        builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(opt =>
         {
@@ -104,6 +115,8 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
+
+        app.UseCors("AllowAll");
 
         app.UseAuthentication();
         app.UseAuthorization();
