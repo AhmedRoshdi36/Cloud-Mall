@@ -60,6 +60,8 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
             {
                 Token = token,
                 UserId = newUser.Id,
+                Name = request.Name,
+                Email = request.Email,
                 Roles = new List<string>() { request.Role },
             };
             return ApiResponse<AuthenticationResult>.SuccessResult(auth);
