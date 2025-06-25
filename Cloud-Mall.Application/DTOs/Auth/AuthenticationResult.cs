@@ -4,5 +4,6 @@
     {
         public string Token { get; set; } = null!;
         public string UserId { get; set; } = null!;
+        public IList<string> Roles { get; set; } = null!;
     }
 }
