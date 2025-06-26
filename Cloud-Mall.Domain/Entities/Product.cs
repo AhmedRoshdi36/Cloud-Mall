@@ -11,6 +11,9 @@
         public decimal? Discount { get; set; }
         public int Stock { get; set; }
         public string ImagesURL { get; set; }
+        public bool IsActive { get; set; } = true;
+
+
 
         public int StoreID { get; set; }
         public virtual Store Store { get; set; }
