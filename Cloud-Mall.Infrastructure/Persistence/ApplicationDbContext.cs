@@ -33,6 +33,7 @@ namespace Cloud_Mall.Infrastructure.Persistence
                 // ... your decimal precision configurations ...
                 entity.Property(p => p.Price).HasPrecision(18, 2);
                 entity.Property(p => p.Discount).HasPrecision(18, 2);
+                entity.Property(s => s.IsActive).HasDefaultValue(true);
 
                 // Address the cascade delete issue for the relationship with Store
                 entity.HasOne(p => p.Store)                  // Product has one Store
@@ -49,6 +50,8 @@ namespace Cloud_Mall.Infrastructure.Persistence
                           .WithMany(u => u.Stores) // From ApplicationUser.Stores
                           .HasForeignKey(s => s.VendorID) // Assuming Store has 'public string VendorID { get; set; }'
                           .OnDelete(DeleteBehavior.Restrict); // <<< KEY CHANGE TO BREAK THE CYCLE
+                    entity.Property(s=>s.IsActive).HasDefaultValue(true); 
+                    // Set default value for IsActive
                 });
 
             });
