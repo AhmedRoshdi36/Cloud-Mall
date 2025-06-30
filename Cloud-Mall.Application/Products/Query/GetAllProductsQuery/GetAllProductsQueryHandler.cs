@@ -19,6 +19,7 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, L
     public async Task<List<GetAllProductsDTO>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
     {
         var products = await _productRepository.GetAllProductsAsync(
+            request.StoreId,
             request.Name,
             request.Brand,
             request.MinPrice,

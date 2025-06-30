@@ -4,6 +4,7 @@ using MediatR;
 namespace Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
 public class GetAllProductsQuery : IRequest<List<GetAllProductsDTO>>
 {
+    public int StoreId {  get; set; }
     public string? Name { get; set; }
     public string? Brand { get; set; }
     public decimal? MinPrice { get; set; }

@@ -27,9 +27,10 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
                 .ToListAsync();
         }
 
-        public async Task<List<Product>> GetAllProductsAsync(string? name, string? brand, decimal? minPrice, decimal? maxPrice, double? minRate, double? maxRate, string? category, int pageNumber, int pageSize)
+        public async Task<List<Product>> GetAllProductsAsync(int storeId,string? name, string? brand, decimal? minPrice, decimal? maxPrice, double? minRate, double? maxRate, string? category, int pageNumber, int pageSize)
         {
             var query = context.Products
+                .Where(p=>p.StoreID==storeId)
                 .Include(p => p.ProductCategory)
                 .Include(p => p.Reviews)
                 .AsQueryable();

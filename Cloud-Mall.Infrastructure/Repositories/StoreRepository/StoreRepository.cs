@@ -3,7 +3,7 @@ using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cloud_Mall.Infrastructure.Repositories
+namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
 {
     internal class StoreRepository : IStoreRepository
     {
