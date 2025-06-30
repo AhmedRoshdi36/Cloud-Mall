@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace Cloud_Mall.Infrastructure.Repositories
+namespace Cloud_Mall.Infrastructure.Repositories.CartRepository
 {
     public class CartRepository : ICartRepository
     {
@@ -34,14 +34,14 @@ namespace Cloud_Mall.Infrastructure.Repositories
             if (cartItem != null)
             {
                 cartItem.Quantity += quantity;
-            }
+            }//commandHandler ?
             else
             {
                 cartItem = new CartItem { ProductID = productId, Quantity = quantity, CartID = cart.ID };
                 cart.CartItems.Add(cartItem);
                 _context.CartItems.Add(cartItem);
             }
-            cart.UpdatedAt = DateTime.UtcNow;
+            cart.UpdatedAt = DateTime.UtcNow;//search?
             await _context.SaveChangesAsync();
         }
 
@@ -50,4 +50,4 @@ namespace Cloud_Mall.Infrastructure.Repositories
             _context.CartItems.Remove(cartItem);
         }
     }
-} 
+}

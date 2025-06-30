@@ -1,7 +1,9 @@
 ﻿using Cloud_Mall.Application.Products.Command.CreateProduct;
+using Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Cloud_Mall.API.Controllers
 {
@@ -28,10 +30,8 @@ namespace Cloud_Mall.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? name, [FromQuery] string? brand, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery] double? minRate, [FromQuery] double? maxRate, [FromQuery] string? category, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetAll([FromBody]GetAllProductsQuery query, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new Cloud_Mall.Application.Products.Query.GetAllProductsQuery.GetAllProductsQuery(
-                name, brand, minPrice, maxPrice, minRate, maxRate, category, pageNumber, pageSize);
             var result = await mediator.Send(query);
             return Ok(result);
         }

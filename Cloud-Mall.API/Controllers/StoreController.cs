@@ -77,7 +77,8 @@ namespace Cloud_Mall.API.Controllers
         }
         [HttpGet("get-all-stores")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllStores(string? categoryName = null, int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllStores(string? categoryName = null, int pageNumber = 1, 
+            int pageSize = 10)
         {
             var query = new Cloud_Mall.Application.Stores.Query.GetAllStoresQuery.GetAllStoresQuery(categoryName,pageNumber,pageSize);
             var result = await mediator.Send(query);
