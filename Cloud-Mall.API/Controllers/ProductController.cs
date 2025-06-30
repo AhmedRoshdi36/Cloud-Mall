@@ -68,7 +68,7 @@ namespace Cloud_Mall.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromBody] GetAllProductsQuery query, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var result = await mediator.Send(query);
             return Ok(result);
