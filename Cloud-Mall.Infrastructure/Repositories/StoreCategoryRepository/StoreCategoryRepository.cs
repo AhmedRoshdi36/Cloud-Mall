@@ -15,11 +15,11 @@ namespace Cloud_Mall.Infrastructure.Repositories
             context = _context;
         }
 
-        public async Task<StoreCategoryDto> CreateAsync(string name, string description)
+        public async Task<StoreCategory> CreateAsync(string name, string description)
         {
             var category = new StoreCategory { Name = name, Description = description };
             await context.StoreCategories.AddAsync(category);
-            return new StoreCategoryDto { Id = category.ID, Name = name, Description = description };
+            return category;
         }
 
         public async Task<List<StoreCategoryDto>> GetAllAsync()

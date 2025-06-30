@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Cloud_Mall.Application.StoreCategories.Command.CreateStoreCategory
 {
-    public class CreateStoreCategoryCommand : IRequest<StoreCategoryDto>
+    public class CreateStoreCategoryCommand : IRequest<ApiResponse<StoreCategoryDto>>
     {
         public string Name { get; set; }
         public string Description { get; set; }

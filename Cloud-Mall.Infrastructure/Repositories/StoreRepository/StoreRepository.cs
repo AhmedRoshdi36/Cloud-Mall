@@ -34,6 +34,8 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
         {
             return await context.Stores
                         .Include(s => s.Addresses)
+                            .ThenInclude(a => a.GoverningLocation)
+                        .Include(s => s.StoreCategory)
                         .FirstOrDefaultAsync(s => s.ID == id && s.VendorID == vendorId);
         }
 

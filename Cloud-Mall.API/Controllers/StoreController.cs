@@ -6,6 +6,7 @@ using Cloud_Mall.Application.Stores.Command.AddStoreAddresses;
 using Cloud_Mall.Application.Stores.Command.CreateStore;
 using Cloud_Mall.Application.Stores.Query.GetAllVendorStoresQuery;
 using Cloud_Mall.Application.Stores.Query.GetStoreByIdQuery;
+using Cloud_Mall.Application.Stores.Query.GetVendorStoreById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -82,6 +83,18 @@ namespace Cloud_Mall.API.Controllers
         public async Task<IActionResult> GetAllVendorStores()
         {
             var query = new GetAllVendorStoresQuery();
+            var result = await mediator.Send(query);
+            if (!result.Success)
+                return BadRequest(result);
+            return Created("", result);
+        }
+
+        [HttpGet("Vendor/GetOneStore/{storeId:int}")]
+        [Authorize(Roles = "Vendor")]
+        public async Task<IActionResult> GetOneStoreByVendor(int storeId)
+        {
+            var query = new GetVendorStoreByIdQuery();
+            query.StoreId = storeId;
             var result = await mediator.Send(query);
             if (!result.Success)
                 return BadRequest(result);
