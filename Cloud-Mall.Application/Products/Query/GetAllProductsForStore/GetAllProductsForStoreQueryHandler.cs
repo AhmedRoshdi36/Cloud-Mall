@@ -37,7 +37,7 @@ namespace Cloud_Mall.Application.Products.Query.GetAllProductsForStore
                 Stock = p.Stock,
                 ImagesURL = p.ImagesURL,
                 StoreID = p.StoreID,
-                StoreName = p.Store?.Name,
+                StoreName = p.Store.Name,
                 ProductCategoryID = p.ProductCategoryID,
                 ProductCategoryName = p.ProductCategory.Name,
                 AverageRating = p.Reviews.Any() ? p.Reviews.Average(r => r.Rate) : 0,

@@ -41,7 +41,11 @@ namespace Cloud_Mall.Application.Authentication.Commands.LoginUser
             var auth = new AuthenticationResult
             {
                 Token = token,
-                UserId = user.Id
+                UserId = user.Id,
+                Name = user.Name,
+                Email = user?.Email,
+                Roles = roles,
+
             };
             return ApiResponse<AuthenticationResult>.SuccessResult(auth);
 

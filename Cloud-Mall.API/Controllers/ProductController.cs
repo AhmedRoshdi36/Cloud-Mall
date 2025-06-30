@@ -1,6 +1,7 @@
 ﻿using Cloud_Mall.Application.Products.Command.CreateProduct;
 using Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
 using Cloud_Mall.Application.Products.Query.GetAllProducts;
+using Cloud_Mall.Application.Products.Query.GetProductForVendor;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,42 @@ namespace Cloud_Mall.API.Controllers
             }
             return Created("", result);
         }
+
+        [HttpGet("vendor/{storeId:int}")]
+        [Authorize(Roles = "Vendor")]
+        public async Task<IActionResult> GetAllForStore([FromRoute] int storeId)
+        {
+            var query = new GetAllProductsForStoreQuery()
+            {
+                StoreId = storeId
+            };
+            var result = await mediator.Send(query);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+
+        }
+
+        [HttpGet("vendor/getproductbyid/{productId:int}")]
+        [Authorize(Roles = "Vendor")]
+        public async Task<IActionResult> GetSingleProductForVendor([FromRoute] int productId)
+        {
+            var query = new GetSingleProductForVendorQuery()
+            {
+                ProductId = productId
+            };
+            var result = await mediator.Send(query);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+
+        }
+
+
 
 
         [HttpGet]
