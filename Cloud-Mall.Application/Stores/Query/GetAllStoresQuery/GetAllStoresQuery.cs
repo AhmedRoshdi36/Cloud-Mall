@@ -2,7 +2,7 @@ using Cloud_Mall.Application.DTOs.Store;
 using MediatR;
 
 namespace Cloud_Mall.Application.Stores.Query.GetAllStoresQuery;
-public class GetAllStoresQuery : IRequest<List<GetAllStoresDTO>>
+public class GetAllStoresQuery : IRequest<GetAllStoresWithPaginationDTO>
 {
     public string? CategoryName { get; set; }
     public int PageNumber { get; set; } = 1;
