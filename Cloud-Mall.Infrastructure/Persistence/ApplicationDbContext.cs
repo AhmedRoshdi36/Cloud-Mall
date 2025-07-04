@@ -33,7 +33,8 @@ namespace Cloud_Mall.Infrastructure.Persistence
                 // ... your decimal precision configurations ...
                 entity.Property(p => p.Price).HasPrecision(18, 2);
                 entity.Property(p => p.Discount).HasPrecision(18, 2);
-                entity.Property(s => s.IsActive).HasDefaultValue(true);
+                entity.Property(s => s.IsDeleted).HasDefaultValue(false);
+                entity.HasQueryFilter(s => !s.IsDeleted);
 
                 // Address the cascade delete issue for the relationship with Store
                 entity.HasOne(p => p.Store)                  // Product has one Store
@@ -44,17 +45,20 @@ namespace Cloud_Mall.Infrastructure.Persistence
                                                           // Products if a Store is deleted.
                                                           // You'll have to manually delete products
                                                           // or handle it in your application logic.
-                modelBuilder.Entity<Store>(entity =>
+            });
+
+            modelBuilder.Entity<Store>(entity =>
                 {
                     entity.HasOne(s => s.Vendor) // Assuming Store has 'public virtual ApplicationUser Vendor { get; set; }'
                           .WithMany(u => u.Stores) // From ApplicationUser.Stores
                           .HasForeignKey(s => s.VendorID) // Assuming Store has 'public string VendorID { get; set; }'
                           .OnDelete(DeleteBehavior.Restrict); // <<< KEY CHANGE TO BREAK THE CYCLE
-                    entity.Property(s=>s.IsActive).HasDefaultValue(true); 
-                    // Set default value for IsActive
+                    entity.Property(s => s.IsDeleted).HasDefaultValue(false);
+                    // default value for isdelete
+                    entity.HasQueryFilter(s => !s.IsDeleted);
+
                 });
 
-            });
         }
     }
 }
