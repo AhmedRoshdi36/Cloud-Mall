@@ -20,13 +20,19 @@ namespace Cloud_Mall.Application.Stores.Query.GetAllVendorStoresQuery
             {
                 return ApiResponse<List<GetOneStoreDTO>>.Failure("This vendor has no stores");
             }
-            var storesDto = stores.Select(s => new GetOneStoreDTO()
+            var storesDto = stores.Select(s => new GetOneStoreDTO
             {
                 ID = s.ID,
                 Name = s.Name,
                 Description = s.Description,
                 LogoURL = s.LogoURL,
                 CategoryName = s.StoreCategory.Name,
+                Addresses = s.Addresses.Select(a => new GetStoreAddressDTO
+                {
+                    StreetAddress = a.StreetAddress,
+                    Notes = a.Notes,
+                    GoverningLocationName = a.GoverningLocation?.Name
+                }).ToList()
             }).ToList();
 
             return ApiResponse<List<GetOneStoreDTO>>.SuccessResult(storesDto);
