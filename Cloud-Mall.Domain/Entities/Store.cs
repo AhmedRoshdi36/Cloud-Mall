@@ -7,7 +7,7 @@
         public string LogoURL { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
-        public bool IsActive { get; set; } 
+        public bool IsDeleted { get; set; } = false;
         // if store is clesed or suspendedd
         public string VendorID { get; set; }
         public virtual ApplicationUser Vendor { get; set; }

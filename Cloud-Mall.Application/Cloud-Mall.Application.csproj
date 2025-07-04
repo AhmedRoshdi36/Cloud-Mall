@@ -24,4 +24,9 @@
     <ProjectReference Include="..\Cloud-Mall.Domain\Cloud-Mall.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Admin\StoreManagement\Command\DeactivateStoreByAdmin\" />
+    <Folder Include="Admin\StoreManagement\" />
+  </ItemGroup>
+
 </Project>
