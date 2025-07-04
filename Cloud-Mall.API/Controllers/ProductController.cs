@@ -18,10 +18,11 @@ namespace Cloud_Mall.API.Controllers
             mediator = _mediator;
         }
 
-        [HttpPost("vendor")]
+        [HttpPost("vendor/{storeId:int}")]
         [Authorize(Roles = "Vendor")]
-        public async Task<IActionResult> Create([FromForm] CreateProductCommand command)
+        public async Task<IActionResult> Create([FromForm] CreateProductCommand command, [FromRoute] int storeId)
         {
+            command.StoreID = storeId;
             var result = await mediator.Send(command);
             if (!result.Success)
             {
@@ -67,9 +68,10 @@ namespace Cloud_Mall.API.Controllers
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        [HttpGet("{storeId:int}")]
+        public async Task<IActionResult> GetAll([FromRoute] int storeId, [FromQuery] GetAllProductsQuery query)
         {
+            query.StoreId = storeId;
             var result = await mediator.Send(query);
             return Ok(result);
         }

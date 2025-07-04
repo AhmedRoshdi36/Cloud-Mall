@@ -11,4 +11,13 @@ public class GetAllProductsDTO
     public string ImagesURL { get; set; }
     public string CategoryName { get; set; }
     public double AverageRate { get; set; }
-} 
+}
+
+public class GetAllProductsWithPaginationDTO
+{
+    public int PageSize { get; set; }
+    public int TotalCount { get; set; }
+    public int CurrentPage { get; set; }
+    public int TotalNumberOfPages { get; set; }
+    public List<GetAllProductsDTO> AllProducts { get; set; }
+}

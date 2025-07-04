@@ -2,9 +2,9 @@ using Cloud_Mall.Application.DTOs.Product;
 using MediatR;
 
 namespace Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
-public class GetAllProductsQuery : IRequest<List<GetAllProductsDTO>>
+public class GetAllProductsQuery : IRequest<GetAllProductsWithPaginationDTO>
 {
-    public int StoreId {  get; set; }
+    public int StoreId { get; set; } = 0;
     public string? Name { get; set; }
     public string? Brand { get; set; }
     public decimal? MinPrice { get; set; }
@@ -14,4 +14,4 @@ public class GetAllProductsQuery : IRequest<List<GetAllProductsDTO>>
     public string? Category { get; set; }
     public int PageNumber { get; set; } = 1;
     public int PageSize { get; set; } = 10;
-} 
+}

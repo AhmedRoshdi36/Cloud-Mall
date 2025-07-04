@@ -2,12 +2,9 @@ using AutoMapper;
 using Cloud_Mall.Application.DTOs.Product;
 using Cloud_Mall.Application.Interfaces;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
-public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, List<GetAllProductsDTO>>
+public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, GetAllProductsWithPaginationDTO>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
@@ -16,9 +13,9 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, L
         _productRepository = productRepository;
         _mapper = mapper;
     }
-    public async Task<List<GetAllProductsDTO>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+    public async Task<GetAllProductsWithPaginationDTO> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
     {
-        var products = await _productRepository.GetAllProductsAsync(
+        var (products, totalCount) = await _productRepository.GetAllProductsAsync(
             request.StoreId,
             request.Name,
             request.Brand,
@@ -29,6 +26,13 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, L
             request.Category,
             request.PageNumber,
             request.PageSize);
-        return _mapper.Map<List<GetAllProductsDTO>>(products);
+        return new GetAllProductsWithPaginationDTO()
+        {
+            PageSize = request.PageSize,
+            TotalCount = totalCount,
+            CurrentPage = request.PageNumber,
+            TotalNumberOfPages = (int)Math.Ceiling((decimal)totalCount / request.PageSize),
+            AllProducts = _mapper.Map<List<GetAllProductsDTO>>(products)
+        };
     }
-} 
+}

@@ -13,7 +13,7 @@ namespace Cloud_Mall.Application.Products.Command.CreateProduct
         public decimal? Discount { get; set; }
         public int Stock { get; set; }
         public IFormFile Image { get; set; }
-        public int StoreID { get; set; }
+        public int StoreID { get; set; } = default;
         public int ProductCategoryID { get; set; }
     }
 }
