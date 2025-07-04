@@ -17,10 +17,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
             await context.AddAsync(store);
         }
 
-        public async Task DeleteAsync(Store store)
-        {
-            context.Stores.Remove(store);
-        }
+       
 
         public async Task<List<Store>> GetAllByVendorAsync(string vendorId)
         {
@@ -57,6 +54,36 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
                 .Include(s => s.StoreCategory)
                 .Where(s => s.StoreCategory.Name == categoryName)
                 .ToListAsync();
+        }
+
+        public async Task SoftDeleteStoreByAdminAsync(int storeId) //for Admin   
+        {
+            var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
+
+            if (store != null)
+            {
+                store.IsDeleted = true;
+
+            }
+            else
+            {
+                throw new ArgumentException("Store not found");
+
+            }
+
+        }
+        
+        public async Task SoftDeleteStoreByVendorAsync(int storeId, string vendorId)
+        {
+           var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId && s.VendorID ==vendorId );
+            if (store != null)
+            {
+                store.IsDeleted = true;
+            }
+            else
+            {
+                throw new ArgumentException("Store not found or you do not have permission to delete this store");
+            }
         }
     }
 }

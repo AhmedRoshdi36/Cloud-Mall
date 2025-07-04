@@ -2,6 +2,7 @@
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
 {
@@ -71,5 +72,67 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
                 .Include(p => p.Store)
                 .FirstOrDefaultAsync(p => p.ID == id);
         }
+        public async Task SoftDeleteProductByAdminAsync(int productId)
+        {
+            var product = await context.Products.FirstOrDefaultAsync(p => p.ID == productId);
+            if (product != null)
+            {
+                product.IsDeleted = true;
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Product with ID {productId} not found.");
+            }
+        }
+                          
+        public async Task SoftDeleteProductByVendorAsync(int productId, string vendorId)
+        {
+            var product = await context.Products
+                  .Include(p => p.Store)
+                  .FirstOrDefaultAsync(p => p.ID == productId && p.Store.VendorID == vendorId);
+            if (product != null)
+            {
+                product.IsDeleted = true;
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Product with ID {productId} not found.");
+            }
+
+        }
+
+        public async Task SoftDeleteProductsByAdminAsync(int storeId)
+        {
+            var products = await context.Products
+                .Include(p => p.Store)
+                .Where(p => p.StoreID == storeId)
+                .ToListAsync();
+
+            if (products == null || products.Count == 0)
+            {
+                throw new KeyNotFoundException($"No products found for StoreID {storeId}.");
+            }
+
+            foreach (var product in products)
+            {
+                product.IsDeleted = true;
+            }
+        }
+
+        public async Task SoftDeleteProductsByVendorAsync(int storeId, string vendorId)
+        {
+            var products = await context.Products
+                .Where(p => p.StoreID == storeId && p.Store.VendorID == vendorId)
+                .ToListAsync();
+            foreach (var product in products)
+            {
+                product.IsDeleted = true;
+            }
+
+        }
+
+        
+
+      
     }
 }

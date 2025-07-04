@@ -1,4 +1,5 @@
-﻿using Cloud_Mall.Application.Products.Command.CreateProduct;
+﻿using Cloud_Mall.Application.Admin.ProductManagement.Command.DeleteProductByAdmin;
+using Cloud_Mall.Application.Products.Command.CreateProduct;
 using Cloud_Mall.Application.Products.Query.GetAllProducts;
 using Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
 using Cloud_Mall.Application.Products.Query.GetProductForVendor;
@@ -52,16 +53,45 @@ namespace Cloud_Mall.API.Controllers
         [Authorize(Roles = "Vendor")]
         public async Task<IActionResult> GetSingleProductForVendor([FromRoute] int productId)
         {
-            var query = new GetSingleProductForVendorQuery()
+            var command = new GetSingleProductForVendorQuery()
             {
                 ProductId = productId
             };
-            var result = await mediator.Send(query);
+            var result = await mediator.Send(command);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
             return Ok(result);
+
+        }
+
+
+
+        [HttpDelete("Admin/deleteproductByAdmin/{productId:int}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteProductByAdmin([FromRoute] int productId)
+        {
+            var command = new DeleteProductByAdminCommand(productId);
+            var result = await mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result); 
+
+            return NoContent(); 
+        }
+
+        [HttpDelete("Admin/deleteProductsByAdmin/{storeId:int}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteProductsByAdmin([FromRoute] int storeId)
+        {
+            var command = new DeleteProductsByAdminCommand(storeId);
+            var result = await mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result);
+
+            return Ok();
 
         }
 
@@ -132,5 +162,6 @@ namespace Cloud_Mall.API.Controllers
             var result = await mediator.Send(new Cloud_Mall.Application.Cart.Query.CalculateCartTotalQuery());
             return Ok(result);
         }
+
     }
 }

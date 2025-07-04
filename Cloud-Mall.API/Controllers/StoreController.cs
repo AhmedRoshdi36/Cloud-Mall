@@ -1,4 +1,5 @@
-﻿using Cloud_Mall.Application.DTOs.ProductCategory;
+﻿using Cloud_Mall.Application.Admin.StoreManagement.Command.DeleteStoreByAdmin;
+using Cloud_Mall.Application.DTOs.ProductCategory;
 using Cloud_Mall.Application.DTOs.Store;
 using Cloud_Mall.Application.ProductCategories.Command.CreateProductCategory;
 using Cloud_Mall.Application.ProductCategories.Query.GetAllProductCategories;
@@ -122,6 +123,19 @@ namespace Cloud_Mall.API.Controllers
             if (result == null)
                 return NotFound("Store not found");
             return Ok(result);
+        }
+
+        [HttpDelete("Admin/deletestoreByAdmin/{storeId:int}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteStoreByAdmin([FromRoute] int storeId)
+        {
+            var command = new DeleteStoreByAdminCommand(storeId);
+            var result = await mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result);
+
+            return NoContent();
         }
     }
 }
