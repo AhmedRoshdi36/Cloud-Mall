@@ -70,6 +70,7 @@ namespace Cloud_Mall.API.Controllers
 
         [HttpDelete("Admin/deleteproductByAdmin/{productId:int}")]
         [Authorize(Roles = "Admin")]
+        [Tags("Admin - Products")]
         public async Task<IActionResult> DeleteProductByAdmin([FromRoute] int productId)
         {
             var command = new DeleteProductByAdminCommand(productId);
@@ -83,6 +84,7 @@ namespace Cloud_Mall.API.Controllers
 
         [HttpDelete("Admin/deleteProductsByAdmin/{storeId:int}")]
         [Authorize(Roles = "Admin")]
+        [Tags("Admin - Products")]
         public async Task<IActionResult> DeleteProductsByAdmin([FromRoute] int storeId)
         {
             var command = new DeleteProductsByAdminCommand(storeId);

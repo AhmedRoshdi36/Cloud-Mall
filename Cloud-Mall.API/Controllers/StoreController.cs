@@ -127,6 +127,7 @@ namespace Cloud_Mall.API.Controllers
 
         [HttpDelete("Admin/deletestoreByAdmin/{storeId:int}")]
         [Authorize(Roles = "Admin")]
+        [Tags("Admin - Stores")]
         public async Task<IActionResult> DeleteStoreByAdmin([FromRoute] int storeId)
         {
             var command = new DeleteStoreByAdminCommand(storeId);
