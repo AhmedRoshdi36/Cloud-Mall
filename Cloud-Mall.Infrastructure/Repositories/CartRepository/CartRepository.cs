@@ -2,8 +2,6 @@ using Cloud_Mall.Application.Interfaces;
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace Cloud_Mall.Infrastructure.Repositories.CartRepository
 {
@@ -17,7 +15,11 @@ namespace Cloud_Mall.Infrastructure.Repositories.CartRepository
 
         public async Task<Cart> GetOrCreateCartForClientAsync(string clientId)
         {
-            var cart = await _context.Carts.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.ClientID == clientId);
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .ThenInclude(p => p.Store)
+                .FirstOrDefaultAsync(c => c.ClientID == clientId);
             if (cart == null)
             {
                 cart = new Cart { ClientID = clientId, UpdatedAt = DateTime.UtcNow };
