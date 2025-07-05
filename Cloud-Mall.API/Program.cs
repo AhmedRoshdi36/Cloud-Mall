@@ -1,14 +1,10 @@
+using System.Text;
 using Cloud_Mall.Application;
 using Cloud_Mall.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Net;
-using System.Reflection.PortableExecutable;
-using System.Text;
 namespace Cloud_Mall.API;
 
 public class Program
@@ -65,11 +61,18 @@ public class Program
         {
             options.AddPolicy("AllowCloudMallFront", policy =>
             {
-                policy.WithOrigins("http://cloudmallfront.runasp.net")
+                policy.WithOrigins(
+                        "http://cloudmallfront.runasp.net",
+                        "https://cloudmallfront.runasp.net",
+                        "http://localhost:4200",
+                        "https://localhost:4200"
+                        )
+                      .AllowCredentials()
                       .WithHeaders("Content-Type", "Authorization")
                       .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
             });
         });
+
 
         //Access-Control-Allow-Origin: http://cloudmallfront.runasp.net
         //Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
