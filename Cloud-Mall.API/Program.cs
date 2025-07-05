@@ -1,10 +1,14 @@
-using System.Text;
 using Cloud_Mall.Application;
 using Cloud_Mall.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net;
+using System.Reflection.PortableExecutable;
+using System.Text;
 namespace Cloud_Mall.API;
 
 public class Program
@@ -47,16 +51,29 @@ public class Program
         });
         builder.Services.AddAuthorization();
 
+        //builder.Services.AddCors(options =>
+        //    {
+        //        options.AddPolicy("AllowAll",
+        //            policy =>
+        //            {
+        //                policy.AllowAnyOrigin()
+        //                      .AllowAnyHeader()
+        //                      .AllowAnyMethod();
+        //            });
+        //    });
         builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowCloudMallFront", policy =>
             {
-                options.AddPolicy("AllowAll",
-                    policy =>
-                    {
-                        policy.AllowAnyOrigin()
-                              .AllowAnyHeader()
-                              .AllowAnyMethod();
-                    });
+                policy.WithOrigins("http://cloudmallfront.runasp.net")
+                      .WithHeaders("Content-Type", "Authorization")
+                      .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
             });
+        });
+
+        //Access-Control-Allow-Origin: http://cloudmallfront.runasp.net
+        //Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+        //Access-Control-Allow-Headers: Content-Type, Authorization
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(opt =>
@@ -118,7 +135,7 @@ public class Program
 
         app.UseStaticFiles();
 
-        app.UseCors("AllowAll");
+        app.UseCors("AllowCloudMallFront");
 
         app.UseAuthentication();
         app.UseAuthorization();
