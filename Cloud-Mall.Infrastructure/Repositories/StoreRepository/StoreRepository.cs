@@ -24,6 +24,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
             return await context.Stores.Where(s => s.VendorID == vendorId)
                 .Include(s => s.StoreCategory)
                 .Include(s => s.Addresses)
+                    .ThenInclude(a => a.GoverningLocation)
                 .ToListAsync();
         }
 
@@ -38,7 +39,11 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
 
         public async Task<List<Store>> GetAllAsync()
         {
-            return await context.Stores.Include(c => c.StoreCategory).ToListAsync();
+            return await context.Stores
+                .Include(c => c.StoreCategory)
+                .Include(s => s.Addresses)
+                    .ThenInclude(a => a.GoverningLocation)
+                .ToListAsync();
         }
 
         public async Task<Store?> GetStoreByIdAsync(int id)

@@ -9,5 +9,5 @@ public class GetOneStoreDTO
     public string Description { get; set; }
     public string LogoURL { get; set; }
     public string CategoryName { get; set; }
-    public List<StoreAddressDTO> Addresses { get; set; }
+    public List<GetStoreAddressDTO> Addresses { get; set; }
 }
