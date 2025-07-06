@@ -2,6 +2,7 @@
 using Cloud_Mall.Application.StoreCategories.Command.CreateStoreCategory;
 using Cloud_Mall.Application.StoreCategories.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cloud_Mall.API.Controllers
@@ -34,5 +35,31 @@ namespace Cloud_Mall.API.Controllers
             var result = await mediator.Send(command);
             return Created("", result);
         }
+
+
+        [HttpGet("Admin/GetAllCategoriesByAdmin")]
+        [Authorize(Roles = "Admin")]
+        [Tags("Admin - Stores")]
+        public async Task<IActionResult> GetAllCategoriesByAdmin()
+        {
+            var categories = await mediator.Send(new StoreCategoryByAdminQuery());
+            return Ok(categories);
+        }
+        [HttpPost("Admin/CreateStoreCategoryByAdmin")]
+        [Authorize(Roles = "Admin")]
+        [Tags("Admin - Stores")]
+        public async Task<IActionResult> CreateStoreCategoryByAdmin([FromBody] CreateStoreCategoryDTO dto)
+        {
+            var command = new CreateStoreCategoryByAdminCommand()
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+            };
+            var result = await mediator.Send(command);
+            return Created("", result);
+        }
+
+
+
     }
 }
