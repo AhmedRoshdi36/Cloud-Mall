@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cloud_Mall.Application.Admin.StoreManagement.Command.DeleteStoreByAdmin;
+namespace Cloud_Mall.Application.Admin.StoreManagement.Command.EnableStoreByAdmin;
 
-public class DeleteStoreByAdminCommand : IRequest<ApiResponse<bool>>
+public class EnableStoreByAdminCommand: IRequest<ApiResponse<bool>>
 {
     public int StoreId { get; set; }
-    public DeleteStoreByAdminCommand(int storeId)
+    public EnableStoreByAdminCommand(int storeId)
     {
         StoreId = storeId;
     }
+
 }

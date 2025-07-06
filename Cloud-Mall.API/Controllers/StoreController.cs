@@ -1,4 +1,6 @@
 ﻿using Cloud_Mall.Application.Admin.StoreManagement.Command.DeleteStoreByAdmin;
+using Cloud_Mall.Application.Admin.StoreManagement.Command.DisableStoreByAdmin;
+using Cloud_Mall.Application.Admin.StoreManagement.Command.EnableStoreByAdmin;
 using Cloud_Mall.Application.DTOs.ProductCategory;
 using Cloud_Mall.Application.DTOs.Store;
 using Cloud_Mall.Application.ProductCategories.Command.CreateProductCategory;
@@ -125,12 +127,39 @@ namespace Cloud_Mall.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("Admin/deletestoreByAdmin/{storeId:int}")]
+        [HttpDelete("Admin/DeleteStoreByAdmin/{storeId:int}")]
         [Authorize(Roles = "Admin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> DeleteStoreByAdmin([FromRoute] int storeId)
         {
             var command = new DeleteStoreByAdminCommand(storeId);
+            var result = await mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result);
+
+            return NoContent();
+        }
+        [HttpDelete("Admin/EnableStoreByAdmin/{storeId:int}")]
+        [Authorize(Roles = "Admin")]
+        [Tags("Admin - Stores")]
+        public async Task<IActionResult> EnableStoreByAdmin([FromRoute] int storeId)
+        {
+            var command = new EnableStoreByAdminCommand(storeId);
+            var result = await mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result);
+
+            return NoContent();
+        }
+
+        [HttpDelete("Admin/DisableStoreByAdmin/{storeId:int}")]
+        [Authorize(Roles = "Admin")]
+        [Tags("Admin - Stores")]
+        public async Task<IActionResult> DisableStoreByAdmin([FromRoute] int storeId)
+        {
+            var command = new DisableStoreByAdminCommand(storeId);
             var result = await mediator.Send(command);
 
             if (!result.Success)
