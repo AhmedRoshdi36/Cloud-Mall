@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Cloud_Mall.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class addisactive : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -285,6 +285,8 @@ namespace Cloud_Mall.Infrastructure.Migrations
                     LogoURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     VendorID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StoreCategoryID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -335,7 +337,6 @@ namespace Cloud_Mall.Infrastructure.Migrations
                     StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StoreID = table.Column<int>(type: "int", nullable: false),
-                    LocationID = table.Column<int>(type: "int", nullable: false),
                     GoverningLocationID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -369,6 +370,7 @@ namespace Cloud_Mall.Infrastructure.Migrations
                     Discount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     ImagesURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     StoreID = table.Column<int>(type: "int", nullable: false),
                     ProductCategoryID = table.Column<int>(type: "int", nullable: false)
                 },

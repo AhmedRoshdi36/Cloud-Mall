@@ -8,7 +8,7 @@
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsDeleted { get; set; } = false;
-        // if store is clesed or suspendedd
+        public bool IsActive { get; set; } = false;
         public string VendorID { get; set; }
         public virtual ApplicationUser Vendor { get; set; }
 

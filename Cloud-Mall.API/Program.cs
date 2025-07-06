@@ -2,7 +2,6 @@ using System.Text;
 using Cloud_Mall.Application;
 using Cloud_Mall.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 namespace Cloud_Mall.API;
@@ -111,19 +110,6 @@ public class Program
 
 
         var app = builder.Build();
-
-        using (var scope = app.Services.CreateScope())
-        {
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roles = { "Vendor", "Client", "Admin", "Delivery" }; // Define your roles
-            foreach (var roleName in roles)
-            {
-                if (!await roleManager.RoleExistsAsync(roleName))
-                {
-                    await roleManager.CreateAsync(new IdentityRole(roleName));
-                }
-            }
-        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
