@@ -66,15 +66,11 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
             var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
 
             if (store != null)
-            {
                 store.IsDeleted = true;
 
-            }
             else
-            {
                 throw new ArgumentException("Store not found");
 
-            }
 
         }
         
@@ -82,13 +78,34 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
         {
            var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId && s.VendorID ==vendorId );
             if (store != null)
-            {
                 store.IsDeleted = true;
-            }
             else
-            {
                 throw new ArgumentException("Store not found or you do not have permission to delete this store");
-            }
         }
+
+        public async Task EnableStoreByAdminAsync(int storeId) //for Admin   
+        { 
+            var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
+            if(store == null) 
+                throw new ArgumentException("Store not found");
+            else if (store.IsActive == true)
+                throw new ArgumentException("Store is already active");
+            else
+                store.IsActive = true;
+            
+            
+        }
+        public async Task DisableStoreByAdminAsync(int storeId) //for Admin   
+        {
+            var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
+            if (store == null)
+                throw new ArgumentException("Store not found");
+            else if (store.IsActive == false)
+                throw new ArgumentException("Store is already Diasbled");
+            else
+                store.IsActive = false;
+        }
+
+
     }
 }

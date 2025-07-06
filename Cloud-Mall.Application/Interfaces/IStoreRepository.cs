@@ -12,7 +12,8 @@ namespace Cloud_Mall.Application.Interfaces
         Task<List<Store>> GetStoresByCategoryNameAsync(string categoryName);
         Task SoftDeleteStoreByAdminAsync(int storetId); //for Admin
         Task SoftDeleteStoreByVendorAsync(int storetId, string vendorId); //check veendor
-        
+        Task EnableStoreByAdminAsync(int storeId);
+        Task DisableStoreByAdminAsync(int storeId);
 
     }
 }
