@@ -18,7 +18,8 @@ namespace Cloud_Mall.Infrastructure.Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<VendorOrder> VendorOrders { get; set; }
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
@@ -58,7 +59,21 @@ namespace Cloud_Mall.Infrastructure.Persistence
                     entity.HasQueryFilter(s => !s.IsDeleted);
 
                 });
+            modelBuilder.Entity<CustomerOrder>(entity =>
+            {
+                entity.HasMany(co => co.VendorOrders)
+                      .WithOne(vo => vo.CustomerOrder)
+                      .HasForeignKey(vo => vo.CustomerOrderID)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
 
+            modelBuilder.Entity<VendorOrder>(entity =>
+            {
+                entity.HasOne(vo => vo.Store)
+                      .WithMany()
+                      .HasForeignKey(vo => vo.StoreID)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }

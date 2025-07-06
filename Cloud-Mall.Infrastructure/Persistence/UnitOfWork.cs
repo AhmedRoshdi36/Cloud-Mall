@@ -13,6 +13,7 @@ namespace Cloud_Mall.Infrastructure.Persistence
         public IProductCategoryRepository ProductCategoryRepository { get; private set; }
         public IProductRepository ProductRepository { get; private set; }
         public ICartRepository CartRepository { get; private set; }
+        public IOrderRepository OrderRepository { get; private set; }
 
         public UnitOfWork(
             ApplicationDbContext context,
