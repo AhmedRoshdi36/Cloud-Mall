@@ -22,7 +22,8 @@ namespace Cloud_Mall.Infrastructure.Persistence
             IGoverningLocationRepository governingLocationsRepository,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
-            ICartRepository cartRepository
+            ICartRepository cartRepository,
+            IOrderRepository orderRepository
             )
         {
             this.context = context;
@@ -33,6 +34,7 @@ namespace Cloud_Mall.Infrastructure.Persistence
             ProductCategoryRepository = productCategoryRepository;
             ProductRepository = productRepository;
             CartRepository = cartRepository;
+            OrderRepository = orderRepository;
         }
 
         public Task<int> SaveChangesAsync()

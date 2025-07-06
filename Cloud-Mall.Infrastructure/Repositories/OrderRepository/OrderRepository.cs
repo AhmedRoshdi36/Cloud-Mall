@@ -25,7 +25,15 @@ namespace Cloud_Mall.Infrastructure.Repositories
 
         public async Task<IEnumerable<CustomerOrder>?> GetAllCustomerOrdersAsync(string clientId)
         {
-            return await _context.CustomerOrders.Where(co => co.ClientID == clientId).OrderByDescending(co => co.OrderDate).ToListAsync();
+            return await _context.CustomerOrders
+                .Where(co => co.ClientID == clientId)
+                .Include(co => co.VendorOrders) // <-- Eagerly load the VendorOrders
+                    .ThenInclude(vo => vo.Store) // <-- Also get the Store name for the DTO
+                .Include(co => co.VendorOrders)
+                    .ThenInclude(vo => vo.OrderItems) // <-- Eagerly load the OrderItems
+                    .ThenInclude(oi => oi.Product) // <-- Also get the Product name for the DTO
+                .OrderByDescending(co => co.OrderDate)
+                .ToListAsync();
         }
 
         public async Task<VendorOrder?> GetVendorOrderByIdAsync(int orderId, string vendorId)
@@ -43,10 +51,23 @@ namespace Cloud_Mall.Infrastructure.Repositories
 
         public async Task<IEnumerable<VendorOrder>?> GetAllOrdersForStoreAsync(int storeId, string vendorId)
         {
-            var storeIsOwnedByVendor = await _context.Stores.AnyAsync(s => s.ID == storeId && s.VendorID == vendorId);
-            if (!storeIsOwnedByVendor) return null;
+            var storeIsOwnedByVendor = await _context.Stores
+                .AnyAsync(s => s.ID == storeId && s.VendorID == vendorId);
 
-            return await _context.VendorOrders.Where(vo => vo.StoreID == storeId).OrderByDescending(vo => vo.OrderDate).ToListAsync();
+            if (!storeIsOwnedByVendor)
+            {
+                return null;
+            }
+
+            return await _context.VendorOrders
+                .Where(vo => vo.StoreID == storeId)
+                .Include(vo => vo.Store) // <-- FIX: Eagerly load the Store to get its name
+                .Include(vo => vo.CustomerOrder) // <-- FIX: Eagerly load the parent order...
+                    .ThenInclude(co => co.Client) // <-- ...to get the Client's details
+                .Include(vo => vo.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .OrderByDescending(vo => vo.OrderDate)
+                .ToListAsync();
         }
     }
 }

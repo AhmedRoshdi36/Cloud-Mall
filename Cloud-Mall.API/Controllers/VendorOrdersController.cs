@@ -75,5 +75,6 @@ namespace Cloud_Mall.API.Controllers
             // Returns a 204 No Content status, indicating success without returning data.
             return NoContent();
         }
+
     }
 }
