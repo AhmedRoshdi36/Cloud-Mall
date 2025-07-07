@@ -72,7 +72,7 @@ public class Program
                         )
                       .AllowCredentials()
                       .WithHeaders("Content-Type", "Authorization")
-                      .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                      .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH");
             });
         });
 
