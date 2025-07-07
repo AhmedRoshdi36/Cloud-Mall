@@ -10,6 +10,7 @@ namespace Cloud_Mall.Application.Interfaces
         IProductCategoryRepository ProductCategoryRepository { get; }
         IProductRepository ProductRepository { get; }
         ICartRepository CartRepository { get; }
+        IOrderRepository OrderRepository { get; }
         //Add more when needed...
         Task<int> SaveChangesAsync();
     }

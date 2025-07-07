@@ -1,6 +1,7 @@
 ﻿using Bogus;
-using Cloud_Mall.Domain.Entities; // Your models' namespace
-using Cloud_Mall.Infrastructure.Persistence; // Your DbContext's namespace
+using Cloud_Mall.Domain.Entities;
+using Cloud_Mall.Domain.Enums;
+using Cloud_Mall.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,19 +10,19 @@ public static class DataGenerator
     public static async Task SeedAsync(IServiceProvider serviceProvider)
     {
         // --- 1. SETUP ---
-        // Get the required services
         using var scope = serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         var faker = new Faker();
 
-        // Ensure the database is clean and freshly created
-        //await context.Database.EnsureDeletedAsync();
-        //await context.Database.EnsureCreatedAsync();
+        // Check if data already exists to prevent re-seeding
+        if (context.Users.Any())
+        {
+            return; // DB has been seeded
+        }
 
         // --- 2. SEED INDEPENDENT ENTITIES ---
-        // Seed entities that don't depend on others first
         var locationFaker = new Faker<GoverningLocation>()
             .RuleFor(l => l.Name, f => f.Address.State())
             .RuleFor(l => l.Region, f => f.Address.City());
@@ -33,8 +34,6 @@ public static class DataGenerator
             .RuleFor(sc => sc.Description, f => f.Lorem.Sentence());
         var storeCategories = storeCategoryFaker.Generate(8);
         await context.StoreCategories.AddRangeAsync(storeCategories);
-
-        // Save these to the database so they get real IDs
         await context.SaveChangesAsync();
 
         // --- 3. SEED ROLES ---
@@ -48,92 +47,80 @@ public static class DataGenerator
         }
 
         // --- 4. SEED USERS AND ASSIGN ROLES ---
-        // Create an Admin user
         var adminUser = new ApplicationUser { Name = "Admin User", Email = "admin@cloudmall.com", UserName = "admin@cloudmall.com", CreatedAt = DateTime.UtcNow };
-        var adminResult = await userManager.CreateAsync(adminUser, "AdminPassword123!");
-        if (adminResult.Succeeded) await userManager.AddToRoleAsync(adminUser, "Admin");
+        if ((await userManager.CreateAsync(adminUser, "AdminPassword123!")).Succeeded)
+            await userManager.AddToRoleAsync(adminUser, "Admin");
 
-        // Create Vendor users
         var sellers = new List<ApplicationUser>();
         for (int i = 0; i < 15; i++)
         {
             var seller = new ApplicationUser { Name = faker.Name.FullName(), Email = $"vendor{i + 1}@cloudmall.com", UserName = $"vendor{i + 1}@cloudmall.com", CreatedAt = DateTime.UtcNow };
-            var result = await userManager.CreateAsync(seller, "Password123!");
-            if (result.Succeeded)
+            if ((await userManager.CreateAsync(seller, "Password123!")).Succeeded)
             {
                 await userManager.AddToRoleAsync(seller, "Vendor");
                 sellers.Add(seller);
             }
         }
 
-        // Create Client users
         var clients = new List<ApplicationUser>();
         for (int i = 0; i < 75; i++)
         {
             var client = new ApplicationUser { Name = faker.Name.FullName(), Email = $"client{i + 1}@email.com", UserName = $"client{i + 1}@email.com", CreatedAt = DateTime.UtcNow };
-            var result = await userManager.CreateAsync(client, "Password123!");
-            if (result.Succeeded)
+            if ((await userManager.CreateAsync(client, "Password123!")).Succeeded)
             {
                 await userManager.AddToRoleAsync(client, "Client");
                 clients.Add(client);
             }
         }
 
-        // Create Delivery users
         var deliveryUsers = new List<ApplicationUser>();
         for (int i = 0; i < 5; i++)
         {
             var deliveryUser = new ApplicationUser { Name = faker.Name.FullName(), Email = $"delivery{i + 1}@cloudmall.com", UserName = $"delivery{i + 1}@cloudmall.com", CreatedAt = DateTime.UtcNow };
-            var result = await userManager.CreateAsync(deliveryUser, "Password123!");
-            if (result.Succeeded)
+            if ((await userManager.CreateAsync(deliveryUser, "Password123!")).Succeeded)
             {
                 await userManager.AddToRoleAsync(deliveryUser, "Delivery");
                 deliveryUsers.Add(deliveryUser);
             }
         }
 
-        // --- 5. SEED STORES & ADDRESSES ---
+        // --- 5. SEED STORES, ADDRESSES, AND PRODUCT CATEGORIES ---
         var stores = new List<Store>();
-        var storeFaker = new Faker<Store>()
-            .RuleFor(s => s.Name, f => f.Company.CompanyName())
-            .RuleFor(s => s.Description, f => f.Company.CatchPhrase())
-            .RuleFor(s => s.LogoURL, f => f.Image.PicsumUrl())
-            .RuleFor(s => s.CreatedAt, f => f.Date.Past(3))
-            .RuleFor(s => s.VendorID, f => f.PickRandom(sellers).Id)
-            .RuleFor(s => s.StoreCategoryID, f => f.PickRandom(storeCategories).ID);
-
         foreach (var seller in sellers)
         {
-            var newStores = storeFaker.Generate(faker.Random.Number(1, 3));
+            var newStores = new Faker<Store>()
+                .RuleFor(s => s.Name, f => f.Company.CompanyName())
+                .RuleFor(s => s.Description, f => f.Company.CatchPhrase())
+                .RuleFor(s => s.LogoURL, f => f.Image.PicsumUrl())
+                .RuleFor(s => s.CreatedAt, f => f.Date.Past(3))
+                .RuleFor(s => s.VendorID, seller.Id)
+                .RuleFor(s => s.StoreCategoryID, f => f.PickRandom(storeCategories).ID)
+                .Generate(faker.Random.Number(1, 2));
+
             foreach (var store in newStores)
             {
-                var addressFaker = new Faker<StoreAddress>()
+                store.Addresses = new Faker<StoreAddress>()
                     .RuleFor(a => a.StreetAddress, f => f.Address.StreetAddress())
                     .RuleFor(a => a.Notes, f => f.Lorem.Sentence())
-                    .RuleFor(a => a.GoverningLocationID, f => f.PickRandom(locations).ID);
-                store.Addresses = addressFaker.Generate(faker.Random.Number(1, 2));
+                    .RuleFor(a => a.GoverningLocationID, f => f.PickRandom(locations).ID)
+                    .Generate(faker.Random.Number(1, 2));
+
+                store.ProductCategories = new Faker<ProductCategory>()
+                   .RuleFor(c => c.Name, f => f.Commerce.Categories(1)[0])
+                   .RuleFor(c => c.Description, f => f.Lorem.Sentence())
+                   .RuleFor(c => c.StoreID, store.ID)
+                   .Generate(faker.Random.Number(2, 5));
             }
             stores.AddRange(newStores);
         }
         await context.Stores.AddRangeAsync(stores);
         await context.SaveChangesAsync();
 
-        // --- 6. SEED PRODUCT CATEGORIES ---
-        var productCategories = new List<ProductCategory>();
-        foreach (var store in stores)
-        {
-            var categoryFaker = new Faker<ProductCategory>()
-               .RuleFor(c => c.Name, f => f.Commerce.Categories(1)[0])
-               .RuleFor(c => c.Description, f => f.Lorem.Sentence())
-               .RuleFor(c => c.StoreID, store.ID);
-            productCategories.AddRange(categoryFaker.Generate(faker.Random.Number(2, 5)));
-        }
-        await context.ProductCategories.AddRangeAsync(productCategories);
-        await context.SaveChangesAsync();
 
         // --- 7. SEED PRODUCTS ---
         var products = new List<Product>();
-        foreach (var category in productCategories)
+        var allProductCategories = context.ProductCategories.ToList();
+        foreach (var category in allProductCategories)
         {
             var productFaker = new Faker<Product>()
                 .RuleFor(p => p.Name, f => f.Commerce.ProductName())
@@ -145,62 +132,91 @@ public static class DataGenerator
                 .RuleFor(p => p.ImagesURL, f => f.Image.PicsumUrl())
                 .RuleFor(p => p.ProductCategoryID, category.ID)
                 .RuleFor(p => p.StoreID, category.StoreID);
-            products.AddRange(productFaker.Generate(faker.Random.Number(5, 20)));
+
+            products.AddRange(productFaker.Generate(faker.Random.Number(5, 15)));
         }
         await context.Products.AddRangeAsync(products);
         await context.SaveChangesAsync();
 
-        // --- 8. SEED REMAINING ENTITIES (Reviews, Orders, etc.) ---
+
+        // --- 8. SEED ORDERS ---
+        var allProducts = context.Products.ToList();
+        var customerOrders = new List<CustomerOrder>();
+
+        foreach (var client in clients)
+        {
+            var checkoutsToGenerate = faker.Random.Number(0, 4);
+            for (int i = 0; i < checkoutsToGenerate; i++)
+            {
+                var customerOrder = new CustomerOrder
+                {
+                    ClientID = client.Id,
+                    OrderDate = faker.Date.Past(1)
+                };
+
+                var itemsInCart = new List<Product>();
+                var cartItemCount = faker.Random.Number(1, 6);
+                for (int j = 0; j < cartItemCount; j++)
+                {
+                    itemsInCart.Add(faker.PickRandom(allProducts));
+                }
+
+                var itemsGroupedByStore = itemsInCart.GroupBy(p => p.StoreID);
+
+                foreach (var storeGroup in itemsGroupedByStore)
+                {
+                    var vendorOrder = new VendorOrder
+                    {
+                        CustomerOrder = customerOrder,
+                        StoreID = storeGroup.Key,
+                        OrderDate = customerOrder.OrderDate,
+                        ShippingCity = faker.Address.City(),
+                        ShippingStreetAddress = faker.Address.StreetAddress(),
+                        Status = faker.PickRandom<VendorOrderStatus>()
+                    };
+
+                    var orderItems = new List<OrderItem>();
+                    foreach (var product in storeGroup)
+                    {
+                        orderItems.Add(new OrderItem
+                        {
+                            VendorOrder = vendorOrder,
+                            ProductID = product.ID,
+                            Quantity = faker.Random.Number(1, 3),
+                            PriceAtTimeOfPurchase = product.Price
+                        });
+                    }
+
+                    vendorOrder.OrderItems = orderItems;
+                    vendorOrder.SubTotal = orderItems.Sum(oi => oi.PriceAtTimeOfPurchase * oi.Quantity);
+                    customerOrder.VendorOrders.Add(vendorOrder);
+                }
+                customerOrder.GrandTotal = customerOrder.VendorOrders.Sum(vo => vo.SubTotal);
+
+                if (customerOrder.VendorOrders.Any())
+                {
+                    customerOrders.Add(customerOrder);
+                }
+            }
+        }
+        await context.CustomerOrders.AddRangeAsync(customerOrders);
+
+        // --- 9. SEED REMAINING ENTITIES (Reviews, Carts, etc.) ---
         var allUsers = sellers.Concat(clients).Concat(deliveryUsers).Append(adminUser).ToList();
 
-        // Seed Reviews
         var reviews = new List<Review>();
-        var reviewableProducts = products.Take(150).ToList();
-        foreach (var product in reviewableProducts)
+        foreach (var product in allProducts.Take(200))
         {
-            var reviewFaker = new Faker<Review>()
+            reviews.AddRange(new Faker<Review>()
                 .RuleFor(r => r.Rate, f => f.Random.Number(1, 5))
                 .RuleFor(r => r.Comment, f => f.Rant.Review(product.Name))
                 .RuleFor(r => r.CreatedAt, f => f.Date.Past(1))
                 .RuleFor(r => r.ClientID, f => f.PickRandom(clients).Id)
-                .RuleFor(r => r.ProductID, product.ID);
-            reviews.AddRange(reviewFaker.Generate(faker.Random.Number(0, 8)));
+                .RuleFor(r => r.ProductID, product.ID)
+                .Generate(faker.Random.Number(0, 5)));
         }
         await context.Reviews.AddRangeAsync(reviews);
 
-        // Seed Orders & Order Items
-        var orders = new List<Order>();
-        foreach (var client in clients)
-        {
-            var orderFaker = new Faker<Order>()
-                .RuleFor(o => o.Status, f => f.PickRandom(new[] { "Pending", "Shipped", "Delivered", "Cancelled" }))
-                .RuleFor(o => o.OrderDate, f => f.Date.Past(2))
-                .RuleFor(o => o.ShippingCity, f => f.Address.City())
-                .RuleFor(o => o.ShippingStreetAddress, f => f.Address.StreetAddress())
-                .RuleFor(o => o.ClientID, client.Id);
-
-            var clientOrders = orderFaker.Generate(faker.Random.Number(0, 5));
-            foreach (var order in clientOrders)
-            {
-                var orderItems = new List<OrderItem>();
-                var itemsToGenerate = faker.Random.Number(1, 5);
-                for (int i = 0; i < itemsToGenerate; i++)
-                {
-                    var randomProduct = faker.PickRandom(products);
-                    var orderItem = new Faker<OrderItem>()
-                        .RuleFor(oi => oi.Quantity, f => f.Random.Number(1, 3))
-                        .RuleFor(oi => oi.ProductID, randomProduct.ID)
-                        .RuleFor(oi => oi.PriceAtTimeOfPurchase, randomProduct.Price);
-                    orderItems.Add(orderItem.Generate());
-                }
-                order.OrderItems = orderItems;
-                order.TotalPrice = orderItems.Sum(oi => oi.PriceAtTimeOfPurchase * oi.Quantity);
-            }
-            orders.AddRange(clientOrders);
-        }
-        await context.Orders.AddRangeAsync(orders);
-
-        // Seed Carts
         var carts = new List<Cart>();
         foreach (var client in clients)
         {
@@ -208,7 +224,6 @@ public static class DataGenerator
         }
         await context.Carts.AddRangeAsync(carts);
 
-        // Seed Complaints & Notifications
         var complaintFaker = new Faker<Complaint>()
             .RuleFor(c => c.Title, f => f.Lorem.Word())
             .RuleFor(c => c.Description, f => f.Lorem.Sentences(3))
@@ -224,7 +239,7 @@ public static class DataGenerator
             .RuleFor(n => n.UserID, f => f.PickRandom(allUsers).Id);
         await context.Notifications.AddRangeAsync(notificationFaker.Generate(100));
 
-        // --- 9. FINAL SAVE ---
+        // --- 10. FINAL SAVE ---
         await context.SaveChangesAsync();
     }
 }

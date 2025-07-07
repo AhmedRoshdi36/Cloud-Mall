@@ -47,6 +47,7 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IFileService, FileService>();
