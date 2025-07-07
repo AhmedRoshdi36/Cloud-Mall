@@ -39,7 +39,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
 
         public async Task<List<Store>> GetAllAsync()
         {
-            return await context.Stores
+            return await context.Stores.Where(s => s.IsActive)
                 .Include(c => c.StoreCategory)
                 .Include(s => s.Addresses)
                     .ThenInclude(a => a.GoverningLocation)
@@ -48,7 +48,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
 
         public async Task<Store?> GetStoreByIdAsync(int id)
         {
-            return await context.Stores
+            return await context.Stores.Where(s => s.IsActive)
                 .Include(s => s.StoreCategory)
                 .FirstOrDefaultAsync(s => s.ID == id);
         }
