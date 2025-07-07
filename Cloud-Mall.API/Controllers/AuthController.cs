@@ -2,6 +2,7 @@
 using Cloud_Mall.Application.Authentication.Commands.RegisterUser;
 using Cloud_Mall.Application.DTOs.Auth;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cloud_Mall.API.Controllers
@@ -28,7 +29,11 @@ namespace Cloud_Mall.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("admin/register")]
+
+        [HttpPost("Admin/register")]
+        [Authorize(Roles = "SuperAdmin")]
+        [Tags("Admin")]
+
         public async Task<IActionResult> AdminRegister([FromBody] RegisterUserDTO request)
         {
             var command = new RegisterUserCommand()

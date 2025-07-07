@@ -6,7 +6,7 @@ namespace Cloud_Mall.Application.Authentication.Commands.RegisterUser
     {
         private readonly List<string> roles = new()
         {
-            "Admin", "Vendor", "Client", "Delivery"
+            "SuperAdmin","Admin", "Vendor", "Client", "Delivery"
         };
         public RegisterUserCommandValidator()
         {
