@@ -140,7 +140,7 @@ namespace Cloud_Mall.API.Controllers
 
             return NoContent();
         }
-        [HttpDelete("Admin/EnableStoreByAdmin/{storeId:int}")]
+        [HttpPost("Admin/EnableStoreByAdmin/{storeId:int}")]
         [Authorize(Roles = "Admin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> EnableStoreByAdmin([FromRoute] int storeId)
@@ -154,7 +154,7 @@ namespace Cloud_Mall.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("Admin/DisableStoreByAdmin/{storeId:int}")]
+        [HttpPost("Admin/DisableStoreByAdmin/{storeId:int}")]
         [Authorize(Roles = "Admin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> DisableStoreByAdmin([FromRoute] int storeId)
