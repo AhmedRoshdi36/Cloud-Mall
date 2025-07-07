@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Cloud_Mall.Application.Orders.Queries.GetForClient
 {
-    public class GetAllCustomerOrdersQuery : IRequest<ApiResponse<List<CustomerOrderDetailsDto>>>
+    public class GetAllCustomerOrdersQuery : IRequest<ApiResponse<ClientOrdersResponseDTO>>
     {
     }
 }

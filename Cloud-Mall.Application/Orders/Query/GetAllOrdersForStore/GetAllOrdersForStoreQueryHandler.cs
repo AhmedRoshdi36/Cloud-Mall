@@ -5,7 +5,8 @@ using MediatR;
 
 namespace Cloud_Mall.Application.Orders.Queries.GetForVendor
 {
-    public class GetAllOrdersForStoreQueryHandler : IRequestHandler<GetAllOrdersForStoreQuery, ApiResponse<List<VendorOrderDto>>>
+    // Update the return type here
+    public class GetAllOrdersForStoreQueryHandler : IRequestHandler<GetAllOrdersForStoreQuery, ApiResponse<VendorStoreOrdersResponseDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUserService;
@@ -18,18 +19,24 @@ namespace Cloud_Mall.Application.Orders.Queries.GetForVendor
             _mapper = mapper;
         }
 
-        public async Task<ApiResponse<List<VendorOrderDto>>> Handle(GetAllOrdersForStoreQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<VendorStoreOrdersResponseDTO>> Handle(GetAllOrdersForStoreQuery request, CancellationToken cancellationToken)
         {
             var vendorId = _currentUserService.UserId;
             var vendorOrders = await _unitOfWork.OrderRepository.GetAllOrdersForStoreAsync(request.StoreId, vendorId);
 
             if (vendorOrders == null)
             {
-                return ApiResponse<List<VendorOrderDto>>.Failure("Store not found or you do not have permission to view its orders.");
+                return ApiResponse<VendorStoreOrdersResponseDTO>.Failure("Store not found or you do not have permission to view its orders.");
             }
 
-            var dtos = _mapper.Map<List<VendorOrderDto>>(vendorOrders);
-            return ApiResponse<List<VendorOrderDto>>.SuccessResult(dtos);
+            // Create the new response object
+            var response = new VendorStoreOrdersResponseDTO
+            {
+                TotalOrders = vendorOrders.Count(),
+                Orders = _mapper.Map<List<VendorOrderDto>>(vendorOrders)
+            };
+
+            return ApiResponse<VendorStoreOrdersResponseDTO>.SuccessResult(response);
         }
     }
 }

@@ -46,7 +46,15 @@ namespace Cloud_Mall.Infrastructure.Repositories
 
         public async Task<IEnumerable<VendorOrder>?> GetAllOrdersForVendorAsync(string vendorId)
         {
-            return await _context.VendorOrders.Where(vo => vo.Store.VendorID == vendorId).OrderByDescending(vo => vo.OrderDate).ToListAsync();
+            return await _context.VendorOrders
+                .Where(vo => vo.Store.VendorID == vendorId)
+                .Include(vo => vo.Store) // Include Store for the name
+                .Include(vo => vo.CustomerOrder) // Include parent...
+                    .ThenInclude(co => co.Client) // ...to get Client details
+                .Include(vo => vo.OrderItems) // Include items...
+                    .ThenInclude(oi => oi.Product) // ...to get Product details
+                .OrderByDescending(vo => vo.OrderDate)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<VendorOrder>?> GetAllOrdersForStoreAsync(int storeId, string vendorId)

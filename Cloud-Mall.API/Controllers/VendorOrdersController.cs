@@ -1,5 +1,7 @@
-﻿using Cloud_Mall.Application.Orders.Commands.UpdateStatus;
+﻿using Cloud_Mall.Application.DTOs.Order;
+using Cloud_Mall.Application.Orders.Commands.UpdateStatus;
 using Cloud_Mall.Application.Orders.Queries.GetForVendor;
+using Cloud_Mall.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +26,9 @@ namespace Cloud_Mall.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllOrdersForVendor()
         {
-            var query = new GetAllOrdersForStoreQuery();
+            var query = new GetAllVendorOrdersQuery();
             var result = await _mediator.Send(query);
+
             return Ok(result);
         }
 
@@ -57,22 +60,30 @@ namespace Cloud_Mall.API.Controllers
         /// Updates the status of a specific vendor order (e.g., to 'Shipped' or 'Fulfilled').
         /// </summary>
         [HttpPatch("{orderId}/status")]
-        public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] UpdateOrderStatusCommand command)
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] UpdateOrderStatusDTO request)
         {
-            if (orderId != command.OrderId)
+            if (!Enum.TryParse<VendorOrderStatus>(request.newStatus, true, out var parsedStatus))
             {
-                return BadRequest("Order ID in the URL and request body must match.");
+                return BadRequest(new ApiResponse<bool>
+                {
+                    Success = false,
+                    Errors = new() { $"The status '{request.newStatus}' is not a valid order status." }
+                });
             }
+
+            var command = new UpdateOrderStatusCommand
+            {
+                OrderId = orderId,
+                NewStatus = parsedStatus
+            };
 
             var result = await _mediator.Send(command);
 
             if (!result.Success)
             {
-                // This could be NotFound or BadRequest depending on the failure reason.
                 return BadRequest(result);
             }
 
-            // Returns a 204 No Content status, indicating success without returning data.
             return NoContent();
         }
 
