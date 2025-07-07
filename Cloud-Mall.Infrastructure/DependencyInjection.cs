@@ -6,6 +6,7 @@ using Cloud_Mall.Infrastructure.Repositories;
 using Cloud_Mall.Infrastructure.Repositories.CartRepository;
 using Cloud_Mall.Infrastructure.Repositories.ProductRepository;
 using Cloud_Mall.Infrastructure.Repositories.StoreRepository;
+using Cloud_Mall.Infrastructure.Repositories.VendorRepository;
 using Cloud_Mall.Infrastructure.Services.CurrentUserService;
 using Cloud_Mall.Infrastructure.Services.FileService;
 using Cloud_Mall.Infrastructure.Services.JwtTokenGenerator;
@@ -52,6 +53,7 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IVendorRepository, VendorRepository>();
 
             // Add other infrastructure services if any
 
