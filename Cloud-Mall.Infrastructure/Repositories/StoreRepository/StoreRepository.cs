@@ -84,8 +84,10 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
             var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
 
             if (store != null)
+            {
                 store.IsDeleted = true;
-
+                store.IsActive = false;
+            }
             else
                 throw new ArgumentException("Store not found");
 
@@ -118,10 +120,8 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
             var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
             if (store == null)
                 throw new ArgumentException("Store not found");
-            else if (store.IsActive == false)
-                throw new ArgumentException("Store is already Diasbled");
-            else
-                store.IsActive = false;
+          
+            store.IsActive = false;
         }
 
         
