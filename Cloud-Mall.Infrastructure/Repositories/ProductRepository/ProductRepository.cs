@@ -108,11 +108,6 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
                 .Where(p => p.StoreID == storeId)
                 .ToListAsync();
 
-            if (products == null || products.Count == 0)
-            {
-                throw new KeyNotFoundException($"No products found for StoreID {storeId}.");
-            }
-
             foreach (var product in products)
             {
                 product.IsDeleted = true;

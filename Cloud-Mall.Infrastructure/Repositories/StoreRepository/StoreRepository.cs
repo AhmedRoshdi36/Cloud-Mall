@@ -49,6 +49,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
         public async Task<List<Store>> GetAllForAdminAsync()
         {
             return await context.Stores
+                .IgnoreQueryFilters()    // include soft-deleted stores for ADMMIn 
                 .Include(c => c.StoreCategory)
                 .Include(s => s.Addresses)
                     .ThenInclude(a => a.GoverningLocation)
