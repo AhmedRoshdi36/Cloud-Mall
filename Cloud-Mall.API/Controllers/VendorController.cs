@@ -15,7 +15,7 @@ namespace Cloud_Mall.API.Controllers
         private readonly IMediator _mediator = mediator;
 
         [HttpGet("Admin/GetAllVendorsByAdmin")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Vendors")]
         public async Task<IActionResult> GetAllVendorsByAdmin()
         {
@@ -26,7 +26,7 @@ namespace Cloud_Mall.API.Controllers
             return Created("", result);
         }
         [HttpGet("admin/vendors/{vendorId}/stores")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Vendors")]
         public async Task<IActionResult> GetAllVendorStoresByAdmin([FromRoute] string vendorId)
         {
@@ -39,7 +39,7 @@ namespace Cloud_Mall.API.Controllers
             if (!result.Success)
                 return BadRequest(result);
 
-            return Ok(result); // Changed from Created to Ok
+            return Ok(result); 
         }
 
     }

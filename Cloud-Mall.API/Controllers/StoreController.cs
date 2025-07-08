@@ -128,7 +128,7 @@ namespace Cloud_Mall.API.Controllers
         }
 
         [HttpDelete("Admin/DeleteStoreByAdmin/{storeId:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> DeleteStoreByAdmin([FromRoute] int storeId)
         {
@@ -141,7 +141,7 @@ namespace Cloud_Mall.API.Controllers
             return NoContent();
         }
         [HttpPost("Admin/EnableStoreByAdmin/{storeId:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> EnableStoreByAdmin([FromRoute] int storeId)
         {
@@ -155,7 +155,7 @@ namespace Cloud_Mall.API.Controllers
         }
 
         [HttpPost("Admin/DisableStoreByAdmin/{storeId:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> DisableStoreByAdmin([FromRoute] int storeId)
         {

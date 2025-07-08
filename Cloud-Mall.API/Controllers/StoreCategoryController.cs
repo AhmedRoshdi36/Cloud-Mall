@@ -38,7 +38,7 @@ namespace Cloud_Mall.API.Controllers
 
 
         [HttpGet("Admin/GetAllCategoriesByAdmin")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> GetAllCategoriesByAdmin()
         {
@@ -46,7 +46,7 @@ namespace Cloud_Mall.API.Controllers
             return Ok(categories);
         }
         [HttpPost("Admin/CreateStoreCategoryByAdmin")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [Tags("Admin - Stores")]
         public async Task<IActionResult> CreateStoreCategoryByAdmin([FromBody] CreateStoreCategoryDTO dto)
         {
