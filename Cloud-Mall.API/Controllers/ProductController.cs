@@ -95,9 +95,9 @@ namespace Cloud_Mall.API.Controllers
             var result = await mediator.Send(command);
 
             if (!result.Success)
-                return NotFound(result); 
+                return NotFound(result);
 
-            return NoContent(); 
+            return NoContent();
         }
 
         [HttpDelete("Admin/deleteProductsByAdmin/{storeId:int}")]
@@ -118,7 +118,7 @@ namespace Cloud_Mall.API.Controllers
 
 
 
-        [HttpGet("{storeId:int}")]
+        [HttpGet("getallbystore/{storeId:int}")]
         public async Task<IActionResult> GetAll([FromRoute] int storeId, [FromQuery] GetAllProductsQuery query)
         {
             query.StoreId = storeId;
