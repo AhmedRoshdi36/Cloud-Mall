@@ -21,6 +21,7 @@ public class DeleteStoreByAdminCommandHandler : IRequestHandler<DeleteStoreByAdm
         {
             await _unitOfWork.StoresRepository.SoftDeleteStoreByAdminAsync(request.StoreId);
             await _unitOfWork.ProductRepository.SoftDeleteProductsByAdminAsync(request.StoreId);
+
             await _unitOfWork.SaveChangesAsync();
             return ApiResponse<bool>.SuccessResult(true);
         }
