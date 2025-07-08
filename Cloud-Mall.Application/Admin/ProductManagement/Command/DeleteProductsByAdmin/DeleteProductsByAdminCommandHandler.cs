@@ -7,13 +7,10 @@ using System;
 
 namespace Cloud_Mall.Application.Admin.ProductManagement.Command.DeleteProductByAdmin
 {
-    public class DeleteProductsByAdminCommandHandler : IRequestHandler<DeleteProductsByAdminCommand, ApiResponse<bool>>
+    public class DeleteProductsByAdminCommandHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<DeleteProductsByAdminCommand, ApiResponse<bool>>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public DeleteProductsByAdminCommandHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public async Task<ApiResponse<bool>> Handle(DeleteProductsByAdminCommand request, CancellationToken cancellationToken)
         {

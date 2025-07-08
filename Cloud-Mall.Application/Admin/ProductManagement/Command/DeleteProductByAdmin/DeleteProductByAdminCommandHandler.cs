@@ -11,15 +11,12 @@ using System.Threading.Tasks;
 
 namespace Cloud_Mall.Application.Admin.ProductManagement.Command.DeleteProductByAdmin
 {
-    public class DeleteProductByAdminCommandHandler :IRequestHandler<DeleteProductByAdminCommand, ApiResponse<bool>>
+    public class DeleteProductByAdminCommandHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<DeleteProductByAdminCommand, ApiResponse<bool>>
 
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-        public DeleteProductByAdminCommandHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
         public async Task<ApiResponse<bool>> Handle(DeleteProductByAdminCommand request, CancellationToken cancellationToken)
         {
             try

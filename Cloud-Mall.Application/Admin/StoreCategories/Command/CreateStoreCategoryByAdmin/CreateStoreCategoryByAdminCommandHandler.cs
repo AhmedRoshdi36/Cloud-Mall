@@ -4,16 +4,11 @@ using MediatR;
 
 namespace Cloud_Mall.Application.StoreCategories.Command.CreateStoreCategory
 {
-    public class CreateStoreCategoryByAdminCommandHandler : IRequestHandler<CreateStoreCategoryByAdminCommand, ApiResponse<StoreCategoryDto>>
+    public class CreateStoreCategoryByAdminCommandHandler(IStoreCategoryRepository _repository, IUnitOfWork unitOfWork)
+        : IRequestHandler<CreateStoreCategoryByAdminCommand, ApiResponse<StoreCategoryDto>>
     {
-        private readonly IStoreCategoryRepository repository;
-        private readonly IUnitOfWork unitOfWork;
-
-        public CreateStoreCategoryByAdminCommandHandler(IStoreCategoryRepository _repository, IUnitOfWork unitOfWork)
-        {
-            this.repository = _repository;
-            this.unitOfWork = unitOfWork;
-        }
+        private readonly IStoreCategoryRepository repository = _repository;
+        private readonly IUnitOfWork unitOfWork = unitOfWork;
 
         public async Task<ApiResponse<StoreCategoryDto>> Handle(CreateStoreCategoryByAdminCommand request, CancellationToken cancellationToken)
         {

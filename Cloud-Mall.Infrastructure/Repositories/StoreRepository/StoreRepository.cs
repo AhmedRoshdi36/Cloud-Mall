@@ -45,6 +45,17 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
                     .ThenInclude(a => a.GoverningLocation)
                 .ToListAsync();
         }
+        
+        public async Task<List<Store>> GetAllForAdminAsync()
+        {
+            return await context.Stores
+                .Include(c => c.StoreCategory)
+                .Include(s => s.Addresses)
+                    .ThenInclude(a => a.GoverningLocation)
+                .Include(s=> s.Vendor)
+                .ToListAsync();
+        }
+        
 
         public async Task<Store?> GetStoreByIdAsync(int id)
         {
@@ -55,12 +66,18 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
 
         public async Task<List<Store>> GetStoresByCategoryNameAsync(string categoryName)
         {
+            return await context.Stores.Where(s => s.IsActive)
+                .Include(s => s.StoreCategory)
+                .Where(s => s.StoreCategory.Name == categoryName)
+                .ToListAsync();
+        }
+        public async Task<List<Store>> GetStoresByCategoryNameByAdminAsync(string categoryName)
+        {
             return await context.Stores
                 .Include(s => s.StoreCategory)
                 .Where(s => s.StoreCategory.Name == categoryName)
                 .ToListAsync();
         }
-
         public async Task SoftDeleteStoreByAdminAsync(int storeId) //for Admin   
         {
             var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
@@ -106,6 +123,6 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
                 store.IsActive = false;
         }
 
-
+        
     }
 }

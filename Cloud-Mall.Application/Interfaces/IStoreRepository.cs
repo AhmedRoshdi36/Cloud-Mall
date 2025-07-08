@@ -8,8 +8,11 @@ namespace Cloud_Mall.Application.Interfaces
         Task<List<Store>> GetAllByVendorAsync(string vendorId);
         Task<Store?> GetByIdAsync(int id, string vendorId);
         Task<List<Store>> GetAllAsync();
+        Task<List<Store>> GetAllForAdminAsync();
         Task<Store?> GetStoreByIdAsync(int id);
         Task<List<Store>> GetStoresByCategoryNameAsync(string categoryName);
+        Task<List<Store>> GetStoresByCategoryNameByAdminAsync(string categoryName);
+        
         Task SoftDeleteStoreByAdminAsync(int storetId); //for Admin
         Task SoftDeleteStoreByVendorAsync(int storetId, string vendorId); //check veendor
         Task EnableStoreByAdminAsync(int storeId);
