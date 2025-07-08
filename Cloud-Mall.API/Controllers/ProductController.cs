@@ -1,4 +1,5 @@
 ﻿using Cloud_Mall.Application.Admin.ProductManagement.Command.DeleteProductByAdmin;
+using Cloud_Mall.Application.Admin.ProductManagement.Query.GetAllProductsForStoreByAdmin;
 using Cloud_Mall.Application.Products.Command.CreateProduct;
 using Cloud_Mall.Application.Products.Query.GetAllProducts;
 using Cloud_Mall.Application.Products.Query.GetAllProductsQuery;
@@ -67,6 +68,23 @@ namespace Cloud_Mall.API.Controllers
         }
 
 
+        [HttpGet("Admin/GetAllProductForStoreByAdmin/{storeId:int}")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Tags("Admin - Products")]
+        public async Task<IActionResult> GetAllProductsForStoreByAdmin([FromRoute] int storeId)
+        {
+            var query = new GetAllProductsForStoreByAdminQuery()
+            {
+                StoreId = storeId
+            };
+            var result = await mediator.Send(query);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+
+        }
 
         [HttpDelete("Admin/deleteproductByAdmin/{productId:int}")]
         [Authorize(Roles = "Admin,SuperAdmin")]
