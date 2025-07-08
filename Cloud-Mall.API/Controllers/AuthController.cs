@@ -30,11 +30,10 @@ namespace Cloud_Mall.API.Controllers
         }
 
 
-        [HttpPost("Admin/register")]
+        [HttpPost("SuperAdmin/Create")]
         [Authorize(Roles = "SuperAdmin")]
-        [Tags("Admin")]
-
-        public async Task<IActionResult> AdminRegister([FromBody] RegisterUserDTO request)
+        [Tags("AdminSuper - Admin")]
+        public async Task<IActionResult> CreateAdmin([FromBody] RegisterUserDTO request)
         {
             var command = new RegisterUserCommand()
             {
