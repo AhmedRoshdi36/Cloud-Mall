@@ -7,6 +7,7 @@ namespace Cloud_Mall.Application.Interfaces
     {
         Task<ApplicationUser?> FindByEmailAsync(string email);
         Task<ApplicationUser?> FindByIdAsync(string email);
+        Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName);
         Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password);
         Task<IdentityResult> AddToRoleAsync(ApplicationUser user, string role);
         Task<bool> CheckPasswordAsync(ApplicationUser user, string password);

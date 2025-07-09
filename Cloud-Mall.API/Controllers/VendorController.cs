@@ -1,5 +1,4 @@
-﻿using Cloud_Mall.Application.Admin.Vendor.Query.GetAllVendorsQuery;
-
+﻿using Cloud_Mall.Application.Admin.Users.Query.GetAllVendorsByAdminQuery;
 using Cloud_Mall.Application.Stores.Query.GetAllVendorStoresQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

@@ -1,4 +1,6 @@
-﻿using Cloud_Mall.Application.Authentication.Commands.LoginUser;
+﻿using Cloud_Mall.Application.Admin.Users.Query.GetAllAdminsBySuperAdminQuery;
+using Cloud_Mall.Application.Admin.Users.Query.GetAllVendorsByAdminQuery;
+using Cloud_Mall.Application.Authentication.Commands.LoginUser;
 using Cloud_Mall.Application.Authentication.Commands.RegisterUser;
 using Cloud_Mall.Application.DTOs.Auth;
 using MediatR;
@@ -87,6 +89,18 @@ namespace Cloud_Mall.API.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+
+        [HttpGet("SuperAdmin/GetAllAdminsBySuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
+        [Tags("AdminSuper - Admin")]
+        public async Task<IActionResult> GetAllAdminsBySuperAdmin()
+        {
+            var query = new GetAllAdminsBySuperAdminQuery();
+            var result = await mediator.Send(query);
+            if (!result.Success)
+                return BadRequest(result);
+            return Created("", result);
         }
 
         [HttpPost("delivery/register")]

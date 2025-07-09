@@ -47,5 +47,11 @@ namespace Cloud_Mall.Infrastructure.Repositories
         {
             return await _userManager.FindByIdAsync(Id);
         }
+
+        public async Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName)
+        {
+            return await _userManager.GetUsersInRoleAsync(roleName);
+        }
+
     }
 }

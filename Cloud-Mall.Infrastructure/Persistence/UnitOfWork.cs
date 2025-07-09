@@ -14,7 +14,6 @@ namespace Cloud_Mall.Infrastructure.Persistence
         public IProductRepository ProductRepository { get; private set; }
         public ICartRepository CartRepository { get; private set; }
         public IOrderRepository OrderRepository { get; private set; }
-        public IVendorRepository VendorRepository { get; private set; }
 
         public UnitOfWork(
             ApplicationDbContext context,
@@ -24,8 +23,7 @@ namespace Cloud_Mall.Infrastructure.Persistence
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
             ICartRepository cartRepository,
-            IOrderRepository orderRepository,
-            IVendorRepository vendorRepository
+            IOrderRepository orderRepository
             )
         {
             this.context = context;
@@ -37,7 +35,6 @@ namespace Cloud_Mall.Infrastructure.Persistence
             ProductRepository = productRepository;
             CartRepository = cartRepository;
             OrderRepository = orderRepository;
-            VendorRepository =vendorRepository;
         }
 
         public Task<int> SaveChangesAsync()
