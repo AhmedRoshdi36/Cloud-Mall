@@ -4,6 +4,8 @@ using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Cloud_Mall.Infrastructure.Repositories;
 using Cloud_Mall.Infrastructure.Repositories.CartRepository;
+using Cloud_Mall.Infrastructure.Repositories.DeliveryCompanyRepository;
+using Cloud_Mall.Infrastructure.Repositories.DeliveryOfferRepository;
 using Cloud_Mall.Infrastructure.Repositories.ProductRepository;
 using Cloud_Mall.Infrastructure.Repositories.StoreRepository;
 using Cloud_Mall.Infrastructure.Services.CurrentUserService;
@@ -52,6 +54,8 @@ namespace Cloud_Mall.Infrastructure
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IDeliveryCompanyRepository, DeliveryCompanyRepository>();
+            services.AddScoped<IDeliveryOfferRepository, DeliveryOfferRepository>();
 
             // Add other infrastructure services if any
 

@@ -10,5 +10,6 @@
         public virtual ApplicationUser Client { get; set; }
 
         public virtual ICollection<VendorOrder> VendorOrders { get; set; } = new List<VendorOrder>();
+        public virtual ICollection<DeliveryOffer> DeliveryOffers { get; set; } = new List<DeliveryOffer>();
     }
 }
