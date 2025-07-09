@@ -1,4 +1,5 @@
-﻿using Cloud_Mall.Application.Admin.Users.Query.GetAllVendorsByAdminQuery;
+﻿using Cloud_Mall.Application.Admin.AllOrders.Query.GetAllOrdersByAdminQuery;
+using Cloud_Mall.Application.Admin.Users.Query.GetAllVendorsByAdminQuery;
 using Cloud_Mall.Application.Stores.Query.GetAllVendorStoresQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +41,23 @@ namespace Cloud_Mall.API.Controllers
 
             return Ok(result); 
         }
+        [HttpGet("Admin/Vendors/{vendorId}/Orders")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Tags("Admin - Orders")]
+        public async Task<IActionResult> GetAllOrdersByAdmin([FromRoute] string vendorId)
+        {
+            if (string.IsNullOrWhiteSpace(vendorId))
+                return BadRequest("Vendor ID must not be empty.");
+
+            var query = new GetAllOrdersByAdminQuery(vendorId);
+            var result = await _mediator.Send(query);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
 
     }
 }
