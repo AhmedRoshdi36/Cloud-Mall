@@ -6,6 +6,7 @@ using Cloud_Mall.Application.DTOs.ProductCategory;
 using Cloud_Mall.Application.DTOs.Store;
 using Cloud_Mall.Application.ProductCategories.Command.CreateProductCategory;
 using Cloud_Mall.Application.ProductCategories.Query.GetAllProductCategories;
+using Cloud_Mall.Application.ProductCategories.Query.GetAllProductCategoriesClient;
 using Cloud_Mall.Application.Stores.Command.AddStoreAddresses;
 using Cloud_Mall.Application.Stores.Command.CreateStore;
 using Cloud_Mall.Application.Stores.Query.GetAllVendorStoresQuery;
@@ -79,7 +80,17 @@ namespace Cloud_Mall.API.Controllers
             var result = await mediator.Send(query);
             if (!result.Success)
                 return BadRequest(result);
-            return Created("", result);
+            return Ok(result);
+        }
+
+        [HttpGet("productcategory/{storeId:int}")]
+        public async Task<IActionResult> GetAllStoreCategoriesClient([FromRoute] int storeId)
+        {
+            var query = new GetAllProductCategoriesClientQuery() { storeId = storeId };
+            var result = await mediator.Send(query);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
         }
 
         [HttpGet("vendor/getallstores")]
@@ -106,18 +117,43 @@ namespace Cloud_Mall.API.Controllers
         }
 
 
+        //[HttpGet("get-all-stores")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> GetAllStores(string? categoryName = null, int pageNumber = 1,
+        //    int pageSize = 10)
+        //{
+        //    var query = new Cloud_Mall.Application.Stores.Query.GetAllStoresQuery.GetAllStoresQuery(categoryName, pageNumber, pageSize);
+        //    var result = await mediator.Send(query);
+        //    if (result == null)
+        //        return NotFound("No stores found");
+        //    return Ok(result);
+
+        //}
         [HttpGet("get-all-stores")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllStores(string? categoryName = null, int pageNumber = 1, 
-            int pageSize = 10)
+        public async Task<IActionResult> GetAllStoresWithFilteration(
+                [FromQuery] int? CategoryId,
+                [FromQuery] int? GoverningLocationId,
+                [FromQuery] string? StreetAddress,
+                [FromQuery] int pageNumber = 1,
+                [FromQuery] int pageSize = 10)
         {
-            var query = new Cloud_Mall.Application.Stores.Query.GetAllStoresQuery.GetAllStoresQuery(categoryName, pageNumber, pageSize);
-            var result = await mediator.Send(query);
-            if (result == null)
-                return NotFound("No stores found");
-            return Ok(result);
+            var result = await mediator.Send(new GetAllStoresWithFilterationQuery
+            {
+                CategoryId = CategoryId,
+                GoverningLocationId = GoverningLocationId,
+                StreetAddress = StreetAddress,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            });
 
+            return Ok(result);
         }
+
+
+
+
+
         [HttpGet("get-store/{storeId:int}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetStoreById([FromRoute] int storeId)

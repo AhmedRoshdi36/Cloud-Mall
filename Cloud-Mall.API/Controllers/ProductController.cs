@@ -183,5 +183,26 @@ namespace Cloud_Mall.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("store/{storeId}/search")]
+        public async Task<IActionResult> SearchProducts(
+            int storeId,
+            [FromQuery] string? name,
+            [FromQuery] string? brand,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            var query = new SearchProductsQuery
+            {
+                StoreId = storeId,
+                Name = name,
+                Brand = brand,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            var result = await mediator.Send(query);
+            return Ok(result);
+        }
+
     }
 }

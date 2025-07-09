@@ -21,8 +21,9 @@ namespace Cloud_Mall.Infrastructure.Repositories
         }
         public async Task<List<ProductCategory>> GetAllStoreCategories(int storeId)
         {
-            var categories = await context.ProductCategories.Where(pc =>
-            pc.StoreID == storeId).ToListAsync();
+            var categories = await context.ProductCategories
+                .Include(pc => pc.Store)
+                .Where(pc => pc.StoreID == storeId).ToListAsync();
             return categories;
         }
 

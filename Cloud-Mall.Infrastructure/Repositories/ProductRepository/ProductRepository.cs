@@ -2,7 +2,6 @@
 using Cloud_Mall.Domain.Entities;
 using Cloud_Mall.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
 {
@@ -84,7 +83,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
                 throw new KeyNotFoundException($"Product with ID {productId} not found.");
             }
         }
-                          
+
         public async Task SoftDeleteProductByVendorAsync(int productId, string vendorId)
         {
             var product = await context.Products
@@ -126,8 +125,38 @@ namespace Cloud_Mall.Infrastructure.Repositories.ProductRepository
 
         }
 
-        
+        public async Task<List<Product>> SearchProductsAsync(
+            int storeId,
+            string? name,
+            string? brand,
+            string? category,
+            int pageNumber,
+            int pageSize)
+        {
+            var query = context.Products
+                .Where(p => p.StoreID == storeId && !p.IsDeleted)
+                .Include(p => p.ProductCategory)
+                .Include(p => p.Reviews)
+                .AsQueryable();
 
-      
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(p => p.Name.ToLower().Contains(name.Trim().ToLower()));
+
+            if (!string.IsNullOrWhiteSpace(brand))
+                query = query.Where(p => p.Brand.ToLower().Contains(brand.Trim().ToLower()));
+
+            if (!string.IsNullOrWhiteSpace(category))
+                query = query.Where(p => p.ProductCategory.Name.ToLower() == category.Trim().ToLower());
+
+            return await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+
+
+
+
     }
 }

@@ -12,5 +12,13 @@ namespace Cloud_Mall.Application.Interfaces
         Task SoftDeleteProductByVendorAsync(int productId, string vendorId); //check vendor
         Task SoftDeleteProductsByAdminAsync(int storeId);   //for Admin 
         Task SoftDeleteProductsByVendorAsync(int storeId, string vendorId); //check vendor
+
+        public Task<List<Product>> SearchProductsAsync(
+            int storeId,
+            string? name,
+            string? brand,
+            string? category,
+            int pageNumber,
+            int pageSize);
     }
 }

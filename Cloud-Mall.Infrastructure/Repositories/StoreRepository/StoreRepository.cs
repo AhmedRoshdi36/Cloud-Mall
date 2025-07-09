@@ -17,7 +17,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
             await context.AddAsync(store);
         }
 
-       
+
 
         public async Task<List<Store>> GetAllByVendorAsync(string vendorId)
         {
@@ -45,7 +45,7 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
                     .ThenInclude(a => a.GoverningLocation)
                 .ToListAsync();
         }
-        
+
         public async Task<List<Store>> GetAllForAdminAsync()
         {
             return await context.Stores
@@ -53,10 +53,10 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
                 .Include(c => c.StoreCategory)
                 .Include(s => s.Addresses)
                     .ThenInclude(a => a.GoverningLocation)
-                .Include(s=> s.Vendor)
+                .Include(s => s.Vendor)
                 .ToListAsync();
         }
-        
+
 
         public async Task<Store?> GetStoreByIdAsync(int id)
         {
@@ -72,6 +72,44 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
                 .Where(s => s.StoreCategory.Name == categoryName)
                 .ToListAsync();
         }
+
+        public async Task<(List<Store> stores, int totalCount)> GetFilteredStoresAsync(
+                int? categoryId,
+                int? governingLocationId,
+                string? streetAddress,
+                int pageNumber,
+                int pageSize)
+        {
+            var query = context.Stores
+                .Where(s => s.IsActive)
+                .Include(s => s.StoreCategory)
+                .Include(s => s.Addresses)
+                    .ThenInclude(a => a.GoverningLocation)
+                .AsQueryable();
+
+            if (categoryId.HasValue)
+                query = query.Where(s => s.StoreCategory.ID == categoryId.Value);
+
+            if (governingLocationId.HasValue)
+                query = query.Where(s => s.Addresses.Any(a => a.GoverningLocationID == governingLocationId.Value));
+
+            if (!string.IsNullOrWhiteSpace(streetAddress))
+            {
+                var lowered = streetAddress.ToLower();
+                query = query.Where(s => s.Addresses.Any(a => a.StreetAddress.ToLower().Contains(lowered)));
+            }
+
+            int totalCount = await query.CountAsync();
+
+            var paginatedStores = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (paginatedStores, totalCount);
+        }
+
+
         public async Task<List<Store>> GetStoresByCategoryNameByAdminAsync(string categoryName)
         {
             return await context.Stores
@@ -93,10 +131,10 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
 
 
         }
-        
+
         public async Task SoftDeleteStoreByVendorAsync(int storeId, string vendorId)
         {
-           var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId && s.VendorID ==vendorId );
+            var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId && s.VendorID == vendorId);
             if (store != null)
                 store.IsDeleted = true;
             else
@@ -104,26 +142,26 @@ namespace Cloud_Mall.Infrastructure.Repositories.StoreRepository
         }
 
         public async Task EnableStoreByAdminAsync(int storeId) //for Admin   
-        { 
+        {
             var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
-            if(store == null) 
+            if (store == null)
                 throw new ArgumentException("Store not found");
             else if (store.IsActive == true)
                 throw new ArgumentException("Store is already active");
             else
                 store.IsActive = true;
-            
-            
+
+
         }
         public async Task DisableStoreByAdminAsync(int storeId) //for Admin   
         {
             var store = await context.Stores.FirstOrDefaultAsync(s => s.ID == storeId);
             if (store == null)
                 throw new ArgumentException("Store not found");
-          
+
             store.IsActive = false;
         }
 
-        
+
     }
 }

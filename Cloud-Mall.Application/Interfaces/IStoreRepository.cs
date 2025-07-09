@@ -12,11 +12,19 @@ namespace Cloud_Mall.Application.Interfaces
         Task<Store?> GetStoreByIdAsync(int id);
         Task<List<Store>> GetStoresByCategoryNameAsync(string categoryName);
         Task<List<Store>> GetStoresByCategoryNameByAdminAsync(string categoryName);
-        
+        Task<(List<Store> stores, int totalCount)> GetFilteredStoresAsync(
+            int? categoryId,
+            int? governingLocationId,
+            string? streetAddress,
+            int pageNumber,
+            int pageSize);
+
         Task SoftDeleteStoreByAdminAsync(int storetId); //for Admin
         Task SoftDeleteStoreByVendorAsync(int storetId, string vendorId); //check veendor
         Task EnableStoreByAdminAsync(int storeId);
         Task DisableStoreByAdminAsync(int storeId);
+
+
 
     }
 }
