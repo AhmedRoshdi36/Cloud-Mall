@@ -77,5 +77,26 @@ namespace Cloud_Mall.Infrastructure.Repositories
                 .OrderByDescending(vo => vo.OrderDate)
                 .ToListAsync();
         }
+
+        public async Task<CustomerOrder?> GetByIdAsync(int orderId)
+        {
+            return await _context.CustomerOrders
+                .Include(co => co.VendorOrders)
+                    .ThenInclude(vo => vo.Store)
+                        .ThenInclude(s => s.Vendor)
+                .Include(co => co.Client)
+                .FirstOrDefaultAsync(co => co.ID == orderId);
+        }
+
+        public async Task<IEnumerable<CustomerOrder>> GetUndeliveredOrdersAsync()
+        {
+            return await _context.CustomerOrders
+                .Include(co => co.VendorOrders)
+                    .ThenInclude(vo => vo.Store)
+                .Include(co => co.Client)
+                .Where(co => co.VendorOrders.Any(vo => vo.Status == Cloud_Mall.Domain.Enums.VendorOrderStatus.Shipped))
+                .OrderByDescending(co => co.OrderDate)
+                .ToListAsync();
+        }
     }
 }

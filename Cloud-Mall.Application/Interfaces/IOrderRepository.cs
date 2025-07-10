@@ -16,5 +16,9 @@ namespace Cloud_Mall.Application.Interfaces
 
         // --- THIS IS THE NEW, CORRECTED METHOD ---
         Task<IEnumerable<VendorOrder>?> GetAllOrdersForStoreAsync(int storeId, string vendorId);
+        
+        // For Delivery Companies
+        Task<CustomerOrder?> GetByIdAsync(int orderId);
+        Task<IEnumerable<CustomerOrder>> GetUndeliveredOrdersAsync();
     }
 }

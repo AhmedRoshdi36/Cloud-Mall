@@ -12,5 +12,6 @@ namespace Cloud_Mall.Domain.Entities
         public virtual ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
         public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public virtual Cart Cart { get; set; }
+        public virtual DeliveryCompany DeliveryCompany { get; set; }
     }
 }

@@ -24,6 +24,8 @@ namespace Cloud_Mall.Infrastructure.Persistence
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<DeliveryCompany> DeliveryCompanies { get; set; }
+        public DbSet<DeliveryOffer> DeliveryOffers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,6 +75,32 @@ namespace Cloud_Mall.Infrastructure.Persistence
                       .WithMany()
                       .HasForeignKey(vo => vo.StoreID)
                       .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<DeliveryCompany>(entity =>
+            {
+                entity.HasOne(dc => dc.User)
+                      .WithOne(u => u.DeliveryCompany)
+                      .HasForeignKey<DeliveryCompany>(dc => dc.UserID)
+                      .OnDelete(DeleteBehavior.Cascade);
+                
+                entity.HasIndex(dc => dc.CommercialSerialNumber)
+                      .IsUnique();
+            });
+
+            modelBuilder.Entity<DeliveryOffer>(entity =>
+            {
+                entity.HasOne(offer => offer.DeliveryCompany)
+                      .WithMany(dc => dc.Offers)
+                      .HasForeignKey(offer => offer.DeliveryCompanyID)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(offer => offer.CustomerOrder)
+                      .WithMany(co => co.DeliveryOffers)
+                      .HasForeignKey(offer => offer.CustomerOrderID)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(offer => offer.Price).HasPrecision(18, 2);
             });
         }
     }
