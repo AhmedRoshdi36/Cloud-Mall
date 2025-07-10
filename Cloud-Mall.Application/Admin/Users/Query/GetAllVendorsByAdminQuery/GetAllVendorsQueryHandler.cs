@@ -9,12 +9,10 @@ public class GetAllVendorsQueryHandler(IIdentityRepository identityRepository)
     : IRequestHandler<GetAllVendorsByAdminQuery, ApiResponse<List<UserDTO>>>
 {
    
-     private readonly IIdentityRepository identityRepository = identityRepository;
 
     public async Task<ApiResponse<List<UserDTO>>> Handle(GetAllVendorsByAdminQuery request, CancellationToken cancellationToken)
     {
     
-        //var vendors = await unitOfWork.UserRepository.GetAllVendorsAsync();
         var vendors = await identityRepository.GetUsersInRoleAsync("Vendor");
 
         if (vendors == null)
