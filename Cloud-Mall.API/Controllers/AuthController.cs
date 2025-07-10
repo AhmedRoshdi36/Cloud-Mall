@@ -1,4 +1,5 @@
-﻿using Cloud_Mall.Application.Admin.Users.Query.GetAllAdminsBySuperAdminQuery;
+﻿using Cloud_Mall.Application.Admin.Users.Command.DeleteAdminBySuperAdminCommand;
+using Cloud_Mall.Application.Admin.Users.Query.GetAllAdminsBySuperAdminQuery;
 using Cloud_Mall.Application.Admin.Users.Query.GetAllClientsByAdminQuery;
 using Cloud_Mall.Application.Admin.Users.Query.GetAllVendorsByAdminQuery;
 using Cloud_Mall.Application.Authentication.Commands.LoginUser;
@@ -46,6 +47,22 @@ namespace Cloud_Mall.API.Controllers
                 ConfirmPassword = request.ConfirmPassword,
                 Role = "Admin",
             };
+            var result = await mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("SuperAdmin/DeleteAdmin/{adminId}")]
+        [Authorize(Roles = "SuperAdmin")]
+        [Tags("AdminSuper - Admin")]
+
+        public async Task<IActionResult> DeleteAdmin([FromRoute] string adminId)
+        {
+            var command = new DeleteAdminBySuperAdminCommand(adminId);
+            
             var result = await mediator.Send(command);
             if (!result.Success)
             {

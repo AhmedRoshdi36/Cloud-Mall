@@ -12,5 +12,7 @@ namespace Cloud_Mall.Application.Interfaces
         Task<IdentityResult> AddToRoleAsync(ApplicationUser user, string role);
         Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
         Task<IList<string>> GetRolesAsync(ApplicationUser user);
+        Task<bool> DeleteAdminByIdAsync(string AdminId);
+
     }
 }

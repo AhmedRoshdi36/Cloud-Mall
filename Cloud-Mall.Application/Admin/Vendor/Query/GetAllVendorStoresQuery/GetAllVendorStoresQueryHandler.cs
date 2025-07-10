@@ -9,12 +9,10 @@ internal class GetAllVendorStoresByAdminQueryHandler : IRequestHandler<GetAllVen
     private readonly IUnitOfWork unitOfWork;
     public GetAllVendorStoresByAdminQueryHandler(ICurrentUserService currentUserService, IUnitOfWork unitOfWork)
     {
-        //this.currentUserService = currentUserService;
         this.unitOfWork = unitOfWork;
     }
     public async Task<ApiResponse<List<GetOneStoreDTO>>> Handle(GetAllVendorStoresByAdminQuery request, CancellationToken cancellationToken)
     {
-        //var stores = await unitOfWork.StoresRepository.GetAllByVendorAsync(currentUserService.UserId);
         var stores = await unitOfWork.StoresRepository.GetAllByVendorAsync(request.VendorId);
         if (stores == null)
         {

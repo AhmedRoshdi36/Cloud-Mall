@@ -53,5 +53,15 @@ namespace Cloud_Mall.Infrastructure.Repositories
             return await _userManager.GetUsersInRoleAsync(roleName);
         }
 
+        public async Task<bool> DeleteAdminByIdAsync(string AdminId)
+        {
+            var admin = await _userManager.FindByIdAsync(AdminId);
+            if (admin == null)
+                return false;
+
+            var result = await _userManager.DeleteAsync(admin);
+            return result.Succeeded;
+        }
+
     }
 }

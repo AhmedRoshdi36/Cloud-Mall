@@ -16,7 +16,6 @@ internal class GetAllClientsByAdminQueryHandler(IIdentityRepository identityRepo
         Handle(GetAllClientsByAdminQuery request, CancellationToken cancellationToken)
     {
 
-        //var vendors = await unitOfWork.UserRepository.GetAllVendorsAsync();
         var Clients = await identityRepository.GetUsersInRoleAsync("Client");
 
         if (Clients == null)
