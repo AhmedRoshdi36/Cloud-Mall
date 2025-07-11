@@ -118,8 +118,8 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            //using var scope = app.Services.CreateScope();
-            //await DataGenerator.SeedAsync(scope.ServiceProvider);
+            using var scope = app.Services.CreateScope();
+            await DataGenerator.SeedAsync(scope.ServiceProvider);
         }
         app.UseSwagger();
         app.UseSwaggerUI();
